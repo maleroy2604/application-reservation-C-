@@ -3,9 +3,9 @@ GO
 CREATE DATABASE [ReservationManager]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'ReservationManager', FILENAME = N'C:\Users\Martin\Desktop\prbd_1617_G03\prbd_1617_G03\database\ReservationManager.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+( NAME = N'ReservationManager', FILENAME = N'{DBPATH}\ReservationManager.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
-( NAME = N'ReservationManager_log', FILENAME = N'C:\Users\Martin\Desktop\prbd_1617_G03\prbd_1617_G03\database\ReservationManager_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+( NAME = N'ReservationManager_log', FILENAME = N'{DBPATH}\ReservationManager_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
 GO
 USE ReservationManager
 GO
