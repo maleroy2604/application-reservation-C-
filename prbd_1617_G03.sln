@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prbd_1617_G03", "prbd_1617_G03\prbd_1617_G03.csproj", "{875350BE-6E5B-4511-B9A2-506C6E04C735}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRBD_Framework", "..\anc3 code source demo\PRBD_Framework\PRBD_Framework\PRBD_Framework.csproj", "{2E922430-EAAC-4589-A8F4-F35FBB9799B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRBD_Framework", "PRBD_Framework\PRBD_Framework.csproj", "{2E922430-EAAC-4589-A8F4-F35FBB9799B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

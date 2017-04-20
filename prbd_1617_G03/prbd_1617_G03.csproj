@@ -169,7 +169,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\anc3 code source demo\PRBD_Framework\PRBD_Framework\PRBD_Framework.csproj">
+    <ProjectReference Include="..\PRBD_Framework\PRBD_Framework.csproj">
       <Project>{2e922430-eaac-4589-a8f4-f35fbb9799b8}</Project>
       <Name>PRBD_Framework</Name>
     </ProjectReference>
