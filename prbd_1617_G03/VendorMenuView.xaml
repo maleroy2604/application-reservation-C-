@@ -1,0 +1,22 @@
+﻿<Window x:Class="prbd_1617_G03.VendorMenuView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:prbd_1617_G03"
+        mc:Ignorable="d"
+        Title="VendorMenuView" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button Content="Ajouter un client" Command="{Binding AddClient}" Margin="0,32,5,-54" Grid.Row="1" />
+        <Button Content="Editer un client" Command="{Binding EditClient}" Margin="0,60,5,-82" Grid.Row="1" />
+        <Button Content="Supprimer un client" Command="{Binding DeleteClient}" Margin="0,88,5,-110" Grid.Row="1" />
+        <Button Content="Ajouter une reservation" Command="{Binding AddReservation}" Margin="0,116,5,-138" Grid.Row="1" />
+        <Button Content="Editer une reservation" Command="{Binding EditReservation}" Margin="0,144,5,-166" Grid.Row="1" Click="Button_Click" />
+        <Button Content="Supprimer une reservation" Command="{Binding DeleteReservation}" Margin="0,172,5,-194" Grid.Row="1" />
+
+    </Grid>
+</Window>

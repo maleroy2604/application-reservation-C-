@@ -53,7 +53,7 @@ namespace prbd_1617_G03
                 
            
 
-            var member = App.Model.User.Find(idUser);
+            var member = App.Model.User.Find(1);
             
             if (string.IsNullOrEmpty(Pseudo))
             {

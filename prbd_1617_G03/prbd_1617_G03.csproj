@@ -70,6 +70,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PriceViewShow.xaml.cs">
+      <DependentUpon>PriceViewShow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewShow.xaml.cs">
+      <DependentUpon>ViewShow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -78,6 +84,9 @@
     </Compile>
     <Compile Include="LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuAdminView.xaml.cs">
+      <DependentUpon>MenuAdminView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model1.cs">
       <AutoGen>True</AutoGen>
@@ -99,6 +108,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="VendorMenuView.xaml.cs">
+      <DependentUpon>VendorMenuView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -163,7 +175,23 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="PriceViewShow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewShow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuAdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VendorMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
