@@ -31,9 +31,9 @@ namespace prbd_1617_G03
         }
         private static void ShowView()
         {
-            var addViewShow = new AddViewShow();
-            addViewShow.Show();
-            Application.Current.MainWindow = addViewShow;
+            var ViewShow = new ViewShow();
+            ViewShow.Show();
+            Application.Current.MainWindow = ViewShow;
             
         }
         private static void PriceView()

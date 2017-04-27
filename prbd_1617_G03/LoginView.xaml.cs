@@ -43,17 +43,13 @@ namespace prbd_1617_G03
             if (Pseudo == "admin") {
                 idUser = 1;
 
-            }else if (Pseudo == "vendor")
-            {
+            }else {
                 idUser = 2;
-            }else
-            {
-                idUser = 0;
             }
                 
            
 
-            var member = App.Model.User.Find(1);
+            var member = App.Model.User.Find(idUser);
             
             if (string.IsNullOrEmpty(Pseudo))
             {
@@ -92,17 +88,17 @@ namespace prbd_1617_G03
             if (!HasErrors)
             {
                 App.CurrentUser = member;
-                //ShowMainView();
+                ShowMainView();
                 Close();
             }
         }
 
-        //private static void ShowMainView()
-        //{
-        //    var mainView = new MainView();
-        //    mainView.Show();
-        //    Application.Current.MainWindow = mainView;
-        //}
+        private static void ShowMainView()
+        {
+            var mainView = new MenuAdminView();
+            mainView.Show();
+            Application.Current.MainWindow = mainView;
+        }
 
     }
 }

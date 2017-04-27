@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b0c7f4151c314c61b2afe39c7d7f548b" Name="Diagram1">
-        <EntityTypeShape EntityType="prbd_1617_G03.Model.Category" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="prbd_1617_G03.Model.Category" Width="1.5" PointX="0.5" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="prbd_1617_G03.Model.Client" Width="1.5" PointX="6.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="prbd_1617_G03.Model.PriceList" Width="1.5" PointX="5.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="prbd_1617_G03.Model.Reservation" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />

@@ -70,6 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NewShow.xaml.cs">
+      <DependentUpon>NewShow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PriceViewShow.xaml.cs">
       <DependentUpon>PriceViewShow.xaml</DependentUpon>
     </Compile>
@@ -175,6 +178,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="NewShow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PriceViewShow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
