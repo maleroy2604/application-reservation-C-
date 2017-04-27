@@ -17,5 +17,6 @@ namespace prbd_1617_G03
         public int idU { get; set; }
         public string login { get; set; }
         public string pwd { get; set; }
+        public short admin { get; set; }
     }
 }
