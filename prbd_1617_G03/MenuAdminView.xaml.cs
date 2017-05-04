@@ -1,6 +1,7 @@
 ﻿using PRBD_Framework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ using System.Windows.Shapes;
 namespace prbd_1617_G03
 {
    
-    public partial class MenuAdminView : WindowBase
+    public partial class MenuAdminView : UserControlBase
     {
         public ICommand Show { get; set; }
         public ICommand Price { get; set; }
@@ -24,27 +25,23 @@ namespace prbd_1617_G03
         public MenuAdminView()
         {
             InitializeComponent();
-            Show = new RelayCommand(ShowView);
-            Price = new RelayCommand(PriceView);
+
+            if (DesignerProperties.GetIsInDesignMode(this))
+                return;
+
             DataContext = this;
 
-        }
-        private static void ShowView()
-        {
-            var ViewShow = new ViewShow();
-            ViewShow.Show();
-            Application.Current.MainWindow = ViewShow;
-            
-        }
-        private static void PriceView()
-        {
-            var priceViewShow = new PriceViewShow();
-            priceViewShow.Show();
-            Application.Current.MainWindow = priceViewShow;
+
 
         }
+
+
 
 
 
     }
-}
+
+
+
+    }
+

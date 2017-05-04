@@ -95,7 +95,7 @@ namespace prbd_1617_G03
 
         private static void ShowMainView()
         {
-            var mainView = new MenuAdminView();
+            var mainView = new MainView();
             mainView.Show();
             Application.Current.MainWindow = mainView;
         }

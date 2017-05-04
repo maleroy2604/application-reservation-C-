@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PRBD_Framework;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -14,11 +15,12 @@ namespace prbd_1617_G03
     
     public partial class App : Application
     {
-        
 
-       
+
+        public static Messenger Messenger { get; } = new Messenger();
         public static Entities Model { get; } = new Entities();
         public static User CurrentUser { get; set; }
+        public const string MSG_VIEW_SHOW = "MSG_VIEW_SHOW";
 
         public App()
         {
