@@ -21,7 +21,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Content="New Show" Command="{Binding NewShow}"  Width="100" Margin="96,0"/>
+        <Button Content="New Show" Command="{Binding NewShow}"  Width="100" Margin="96,0" />
+        <Button Content="Delete Show" Command="{Binding DelShow}"  Width="100" Margin="96,0" />
+        <Button Content="Edit Show" Command="{Binding EditShow}"  Width="100" Margin="96,0" />
     </StackPanel>
    
 </f:WindowBase >

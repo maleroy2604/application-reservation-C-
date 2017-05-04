@@ -47,7 +47,7 @@ namespace prbd_1617_G03
         }
         public ViewShow()
         {
-            DataContext = this;
+            
 
             var model = new Entities();
             Shows = new ObservableCollection<Show>(model.Show);
@@ -55,19 +55,28 @@ namespace prbd_1617_G03
             ClearFilter = new RelayCommand(() => { Filter = ""; });
 
             InitializeComponent();
+            NewShow = new RelayCommand(ShowView);
+            DataContext = this;
         }
 
         public ICommand ClearFilter { get; set; }
         
         private void ApplyFilterAction()
         {
-            Console.WriteLine("Search clicked! " + Filter);
+           
             var model = new Entities();
             var query = from m in model.Show
                         where
                             m.showName.Contains(Filter) 
                         select m;
             Shows = new ObservableCollection<Show>(query);
+        }
+        private static void ShowView()
+        {
+            var ViewShow = new newShow();
+            ViewShow.Show();
+            Application.Current.MainWindow = ViewShow;
+
         }
     }
    

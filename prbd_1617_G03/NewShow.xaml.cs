@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace prbd_1617_G03
 {
     /// <summary>
-    /// Logique d'interaction pour NewShow.xaml
+    /// Logique d'interaction pour newShow.xaml
     /// </summary>
-    public partial class NewShow : Window
+    public partial class newShow : Window
     {
-        public NewShow()
+        public newShow()
         {
             InitializeComponent();
         }
