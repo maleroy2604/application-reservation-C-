@@ -53,10 +53,11 @@ namespace prbd_1617_G03
             App.Messenger.Register(App.MSG_NEW_SHOW,
                                    () =>
                                    {
-
+                                       var show = App.Model.Show.Create();
                                        var tab = new TabItem()
                                        {
-                                           Header = "NEW SHOW"
+                                           Header = "NEW SHOW",
+                                           Content= new newShow(show,true)
                                        };
 
                                        tabControl.Items.Add(tab);

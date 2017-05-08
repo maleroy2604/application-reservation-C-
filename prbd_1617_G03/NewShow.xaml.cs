@@ -15,14 +15,40 @@ using System.Windows.Shapes;
 
 namespace prbd_1617_G03
 {
-    /// <summary>
-    /// Logique d'interaction pour newShow.xaml
-    /// </summary>
+    
     public partial class newShow : UserControlBase
     {
-        public newShow()
+        public Show Show { get; set; }
+
+        private bool isNew;
+        public bool IsNew
+        {
+            get { return isNew; }
+            set
+            {
+                isNew = value;
+                RaisePropertyChanged(nameof(IsNew));
+
+            }
+
+        }
+        public string NameShow
+        {
+            get { return Show.showName; }
+            set
+            {
+                Show.showName = value;
+                RaisePropertyChanged(nameof(Show.showName));
+                App.Messenger.NotifyColleagues(App.MSG_NAMESHOW_CHANGED, string.IsNullOrEmpty(value) ? "<new show>" : value);
+            }
+        }
+        public newShow(Show show ,bool isNew)
         {
             InitializeComponent();
+            DataContext = this;
+            Show = show;
+            IsNew = isNew;
+
         }
     }
 }
