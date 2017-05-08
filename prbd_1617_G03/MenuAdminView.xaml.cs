@@ -26,8 +26,7 @@ namespace prbd_1617_G03
         {
             InitializeComponent();
 
-            if (DesignerProperties.GetIsInDesignMode(this))
-                return;
+            
             Show = new RelayCommand(() => { App.Messenger.NotifyColleagues(App.MSG_VIEW_SHOW); });
             Price = new RelayCommand(() => { App.Messenger.NotifyColleagues(App.MSG_VIEW_PRICE); });
             DataContext = this;

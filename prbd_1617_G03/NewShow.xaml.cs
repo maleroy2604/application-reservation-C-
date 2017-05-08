@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PRBD_Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace prbd_1617_G03
     /// <summary>
     /// Logique d'interaction pour newShow.xaml
     /// </summary>
-    public partial class newShow : Window
+    public partial class newShow : UserControlBase
     {
         public newShow()
         {

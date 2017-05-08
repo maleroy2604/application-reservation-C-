@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace prbd_1617_G03
 {
     
-    public partial class ViewShow : WindowBase
+    public partial class ViewShow : UserControlBase
     {
         public ICommand NewShow { get; set; }
         
@@ -49,13 +49,13 @@ namespace prbd_1617_G03
         {
             
 
-            var model = new Entities();
-            Shows = new ObservableCollection<Show>(model.Show);
+           
+            Shows = new ObservableCollection<Show>(App.Model.Show);
 
             ClearFilter = new RelayCommand(() => { Filter = ""; });
-
+            NewShow = new RelayCommand(() => { App.Messenger.NotifyColleagues(App.MSG_NEW_SHOW); });
             InitializeComponent();
-            NewShow = new RelayCommand(ShowView);
+           
             DataContext = this;
         }
 
@@ -65,19 +65,13 @@ namespace prbd_1617_G03
         {
            
             var model = new Entities();
-            var query = from m in model.Show
+            var query = from m in App.Model.Show
                         where
                             m.showName.Contains(Filter) 
                         select m;
             Shows = new ObservableCollection<Show>(query);
         }
-        private static void ShowView()
-        {
-            var ViewShow = new newShow();
-            ViewShow.Show();
-            Application.Current.MainWindow = ViewShow;
-
-        }
+        
     }
    
 }

@@ -26,10 +26,11 @@ namespace prbd_1617_G03
             App.Messenger.Register(App.MSG_VIEW_SHOW,
                                     () =>
                                     {
-        
+
                                         var tab = new TabItem()
                                         {
-                                            Header = "SHOW"
+                                            Header = "SHOW",
+                                            Content=new ViewShow()
                                         };
         
                                         tabControl.Items.Add(tab);
@@ -43,6 +44,19 @@ namespace prbd_1617_G03
                                        var tab = new TabItem()
                                        {
                                            Header = "PRICE"
+                                       };
+
+                                       tabControl.Items.Add(tab);
+
+                                       Dispatcher.InvokeAsync(() => tab.Focus());
+                                   });
+            App.Messenger.Register(App.MSG_NEW_SHOW,
+                                   () =>
+                                   {
+
+                                       var tab = new TabItem()
+                                       {
+                                           Header = "NEW SHOW"
                                        };
 
                                        tabControl.Items.Add(tab);
