@@ -18,29 +18,40 @@ namespace prbd_1617_G03
     
     public partial class MainView : WindowBase
     {
-        public ICommand ViewShow { get; set; }
+       
         
 
         public MainView()
         {
-            InitializeComponent();
-            ViewShow = new RelayCommand(() => { App.Messenger.NotifyColleagues(App.MSG_VIEW_SHOW); });
             App.Messenger.Register(App.MSG_VIEW_SHOW,
-                                () =>
-                                {
-                                        // crée dynamiquement un nouvel onglet avec le titre "<new member>"
+                                    () =>
+                                    {
+        
                                         var tab = new TabItem()
-                                {
-                                    Header = "<SHOW>"
-                                };
-                                        // ajoute ce onglet à la liste des onglets existant du TabControl
+                                        {
+                                            Header = "SHOW"
+                                        };
+        
                                         tabControl.Items.Add(tab);
-                                        // exécute la méthode Focus() de l'onglet pour lui donner le focus (càd l'activer)
-                                        Dispatcher.InvokeAsync(() => tab.Focus());
-                                });
-
-
        
+                                        Dispatcher.InvokeAsync(() => tab.Focus());
+                                    });
+            App.Messenger.Register(App.MSG_VIEW_PRICE,
+                                   () =>
+                                   {
+
+                                       var tab = new TabItem()
+                                       {
+                                           Header = "PRICE"
+                                       };
+
+                                       tabControl.Items.Add(tab);
+
+                                       Dispatcher.InvokeAsync(() => tab.Focus());
+                                   });
+
+
+
         }
     }
 }

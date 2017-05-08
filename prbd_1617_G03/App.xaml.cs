@@ -21,6 +21,8 @@ namespace prbd_1617_G03
         public static Entities Model { get; } = new Entities();
         public static User CurrentUser { get; set; }
         public const string MSG_VIEW_SHOW = "MSG_VIEW_SHOW";
+        public const string MSG_VIEW_PRICE = "MSG_VIEW_PRICE";
+
 
         public App()
         {
