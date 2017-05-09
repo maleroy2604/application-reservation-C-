@@ -64,6 +64,10 @@ namespace prbd_1617_G03
 
                                        Dispatcher.InvokeAsync(() => tab.Focus());
                                    });
+            App.Messenger.Register<string>(App.MSG_NAMESHOW_CHANGED, (s) =>
+            {
+                (tabControl.SelectedItem as TabItem).Header = s;
+            });
 
 
 

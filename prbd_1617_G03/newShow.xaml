@@ -11,15 +11,14 @@
     <Grid>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Nom du show :" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="104,7,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Date "/><Run Text="début "/><Run Text=" :"/></TextBlock>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Date "/><Run Text="Show"/><Run Text=":"/></TextBlock>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="13,102,0,0" TextWrapping="Wrap" Text="Description :" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="100" Margin="103,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150 "/>
         <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="13,204,0,0" TextWrapping="Wrap" Text="Poster :" VerticalAlignment="Top"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="104,176,0,0" VerticalAlignment="Top" Width="100"/>
         <DatePicker HorizontalAlignment="Left" Margin="104,37,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,-0.147"/>
-        <Image x:Name="image1" HorizontalAlignment="Left" Height="100" Margin="104,176,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="13,69,0,0" TextWrapping="Wrap"  Text="Date de fin :" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="104,68,0,0" VerticalAlignment="Top"/>
+        <Image x:Name="image1" HorizontalAlignment="Left" Height="100" Margin="103,204,0,-4" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="button" Content="Save" HorizontalAlignment="Left" Margin="215,221,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
 
     </Grid>
 </f:UserControlBase>
