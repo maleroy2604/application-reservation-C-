@@ -15,12 +15,21 @@
             <Button Content="Clear" Command="{Binding ClearFilter}"/>
         </StackPanel>
         <ListView x:Name="ListView" ItemsSource="{Binding Shows}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding DisplayMemberDetails}"
+                                        CommandParameter="{Binding ElementName=listView, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding showName}"/>
+                    <StackPanel>
+                        <TextBlock FontSize="14"  TextAlignment="Center" Text="{Binding showName}" />
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
         <Button Content="New Show" Command="{Binding NewShow}"  Width="100" Margin="96,0" />
     </StackPanel>
    

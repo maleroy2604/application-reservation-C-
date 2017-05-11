@@ -20,7 +20,7 @@ namespace prbd_1617_G03
     public partial class MainView : WindowBase
     {
 
-       
+
 
         public MainView()
         {
@@ -31,11 +31,11 @@ namespace prbd_1617_G03
                                         var tab = new TabItem()
                                         {
                                             Header = "SHOW",
-                                            Content=new ViewShow()
+                                            Content = new ViewShow()
                                         };
-        
+
                                         tabControl.Items.Add(tab);
-       
+
                                         Dispatcher.InvokeAsync(() => tab.Focus());
                                     });
             App.Messenger.Register(App.MSG_VIEW_PRICE,
@@ -55,23 +55,42 @@ namespace prbd_1617_G03
                                    () =>
                                    {
                                        var show = App.Model.Show.Create();
-                                       var tab = new TabItem()
-                                       {
-                                           Header = "NEW SHOW",
-                                           Content= new newShow(show,true)
-                                       };
+                                       newTabForShow(show, true);
+                                       //var tab = new TabItem()
+                                       //{
+                                       //    Header = "NEW SHOW",
+                                       //    Content = new newShow(show, true)
+                                       //};
 
-                                       tabControl.Items.Add(tab);
-
-                                       Dispatcher.InvokeAsync(() => tab.Focus());
+                                       
                                    });
             App.Messenger.Register<string>(App.MSG_NAMESHOW_CHANGED, (s) =>
             {
                 (tabControl.SelectedItem as TabItem).Header = s;
             });
-
-            
         }
+            private void newTabForShow(Show show, bool isNew)
+        {
+            var tab = new TabItem()
+            {
+                Header = isNew ? "<new show>" : show.showName,
+                Content = new newShow(show, isNew)
+            };
+            tab.MouseDown += (o, e) =>
+            {
+                if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Pressed)
+                    tabControl.Items.Remove(o);
+            };
+            tab.KeyDown += (o, e) =>
+            {
+                if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
+                    tabControl.Items.Remove(o);
+            };
+            tabControl.Items.Add(tab);
+            Dispatcher.InvokeAsync(() => tab.Focus());
+        }
+
+    }
         
     }
-}
+
