@@ -1,6 +1,7 @@
 ﻿using PRBD_Framework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,15 +40,15 @@ namespace prbd_1617_G03
             {
                 Show.showName = value;
                 RaisePropertyChanged(nameof(showName));
-                App.Messenger.NotifyColleagues(App.MSG_NAMESHOW_CHANGED, string.IsNullOrEmpty(value) ? "<new show>" : value);
+                //App.Messenger.NotifyColleagues(App.MSG_NAMESHOW_CHANGED, string.IsNullOrEmpty(value) ? "<new show>" : value);
             }
         }
-        public DateTime showDate
+        public string showDate
         {
-            get { return Show.showDate; }
+            get { return Convert.ToString(Show.showDate); }
             set
             {
-                Show.showDate = value;
+                Show.showDate = Convert.ToDateTime(value);
                 RaisePropertyChanged(nameof(showDate));
             }
         }
@@ -73,13 +74,37 @@ namespace prbd_1617_G03
 
         public newShow(Show show ,bool isNew)
         {
-            InitializeComponent();
-            DataContext = this;
+            
             Show = show;
             IsNew = isNew;
-            Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
+            Save = new RelayCommand(SaveAction);
+            InitializeComponent();
+            DataContext = this;
 
         }
-        
+        private void SaveAction()
+        {
+            if(IsNew)
+            {
+
+                App.Model.Show.Add(Show);
+                IsNew = false;
+            }
+            App.Model.SaveChanges();
+            App.Messenger.NotifyColleagues(App.MSG_SHOW_CHANGED,Show);
+
+        }
+        //private bool CanSaveOrCancelAction()
+        //{
+        //    if (IsNew)
+        //        return !string.IsNullOrEmpty(showName) && !HasErrors;
+        //    var change = (from c in App.Model.ChangeTracker.Entries<Show>()
+        //                  where c.Entity == Show
+        //                  select c).FirstOrDefault();
+        //    return change != null && change.State != EntityState.Unchanged;
+        //}
+
     }
-}
+    }
+    
+

@@ -24,7 +24,7 @@ namespace prbd_1617_G03
         public const string MSG_VIEW_PRICE = "MSG_VIEW_PRICE";
         public const string MSG_NEW_SHOW = "MSG_NEW_SHOW";
         public const string MSG_NAMESHOW_CHANGED = "MSG_NAMESHOW_CHANGED";
-
+        public const string MSG_SHOW_CHANGED = "MSG_SHOW_CHANGED";
 
         public App()
         {

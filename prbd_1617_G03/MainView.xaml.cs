@@ -1,6 +1,7 @@
 ﻿using PRBD_Framework;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,8 @@ namespace prbd_1617_G03
     
     public partial class MainView : WindowBase
     {
+
        
-        
 
         public MainView()
         {
@@ -69,8 +70,8 @@ namespace prbd_1617_G03
                 (tabControl.SelectedItem as TabItem).Header = s;
             });
 
-
-
+            
         }
+        
     }
 }
