@@ -72,6 +72,17 @@ namespace prbd_1617_G03
             {
                 tabControl.Items.Remove(tab);
             });
+            App.Messenger.Register<Show>(App.MSG_DISPLAY_SHOW, show =>
+            {
+                if (show != null)
+                {
+                    var tab = (from TabItem t in tabControl.Items where (string)t.Header == show.showName select t).FirstOrDefault();
+                    if (tab == null)
+                        newTabForShow(show, false);
+                    else
+                        Dispatcher.InvokeAsync(() => tab.Focus());
+                }
+            });
 
         }
             private void newTabForShow(Show show, bool isNew)
