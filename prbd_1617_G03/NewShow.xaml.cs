@@ -89,6 +89,7 @@ namespace prbd_1617_G03
             Cancel = new RelayCommand(CancelAction, CanSaveOrCancelAction);
             LoadImage = new RelayCommand(LoadImageAction);
             ClearImage= new RelayCommand(ClearImageAction);
+            Delete = new RelayCommand(DeleteAction, () => { return IsExisting; });
 
             DataContext = this;
 
@@ -173,7 +174,14 @@ namespace prbd_1617_G03
             Show.poster = null;
             RaisePropertyChanged(nameof(poster));
         
-    }
+        }
+        private void DeleteAction()
+        {
+            App.Model.Show.Remove(Show);
+            App.Model.SaveChanges();
+            App.Messenger.NotifyColleagues(App.MSG_SHOW_CHANGED, Show);
+            App.Messenger.NotifyColleagues(App.MSG_CLOSE_TAB, Parent);
+        }
 
     }
     }

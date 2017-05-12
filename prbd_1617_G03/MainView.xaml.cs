@@ -68,6 +68,11 @@ namespace prbd_1617_G03
             {
                 (tabControl.SelectedItem as TabItem).Header = s;
             });
+            App.Messenger.Register<TabItem>(App.MSG_CLOSE_TAB, tab =>
+            {
+                tabControl.Items.Remove(tab);
+            });
+
         }
             private void newTabForShow(Show show, bool isNew)
         {
@@ -89,6 +94,7 @@ namespace prbd_1617_G03
             tabControl.Items.Add(tab);
             Dispatcher.InvokeAsync(() => tab.Focus());
         }
+
 
     }
         

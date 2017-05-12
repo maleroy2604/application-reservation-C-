@@ -17,7 +17,7 @@
         <ListView x:Name="ListView" ItemsSource="{Binding Shows}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding DisplayMemberDetails}"
+                    <i:InvokeCommandAction Command="{Binding ShowDisplay}"
                                         CommandParameter="{Binding ElementName=listView, Path=SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>

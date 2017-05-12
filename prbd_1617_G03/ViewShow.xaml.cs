@@ -20,7 +20,7 @@ namespace prbd_1617_G03
     public partial class ViewShow : UserControlBase
     {
         public ICommand NewShow { get; set; }
-        
+        public ICommand ShowDisplay { get; set; }
         private ObservableCollection<Show> shows;
         public ObservableCollection<Show> Shows
         {
@@ -55,6 +55,7 @@ namespace prbd_1617_G03
             ClearFilter = new RelayCommand(() => { Filter = ""; });
             NewShow = new RelayCommand(() => { App.Messenger.NotifyColleagues(App.MSG_NEW_SHOW); });
             App.Messenger.Register<Show>(App.MSG_SHOW_CHANGED, show => { ApplyFilterActionbis(); });
+            ShowDisplay = new RelayCommand<Show>(m => { App.Messenger.NotifyColleagues(App.MSG_DISPLAY_SHOW, m); });
             InitializeComponent();
 
            
