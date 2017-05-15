@@ -8,9 +8,10 @@
         mc:Ignorable="d"
         Title="My Show App" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <TabControl x:Name="tabControl" Margin="10" Grid.Row="1">
-        <TabItem x:Name="MenuAdmin" Header="Menu Admin">
+        <TabItem x:Name="ViewShow" Header="View Show">
             <ContentControl>
                 <local:ViewShow/>
+                
             </ContentControl>
         </TabItem>
     </TabControl>

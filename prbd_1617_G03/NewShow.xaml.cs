@@ -89,19 +89,24 @@ namespace prbd_1617_G03
         {
             get { return getPrice(Show.idS, 1); }
             set {
-                setPrice();
+                setPrice(1,value);
+               
             }
         }
         public decimal PriceB
         {
             get { return getPrice(Show.idS, 2); }
-            set { 
+            set {
+                setPrice(2, value);
+                
             }
         }
         public decimal PriceC
         {
             get { return getPrice(Show.idS, 3); }
-            set { 
+            set {
+                setPrice(3, value);
+                
             }
         }
 
@@ -113,7 +118,7 @@ namespace prbd_1617_G03
             DataContext = this;
             Show = show;
             IsNew = isNew;
-
+            
 
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Cancel = new RelayCommand(CancelAction, CanSaveOrCancelAction);
@@ -145,6 +150,10 @@ namespace prbd_1617_G03
             var change = (from c in App.Model.ChangeTracker.Entries<Show>()
                           where c.Entity == Show
                           select c).FirstOrDefault();
+
+
+
+
             return change != null && change.State != EntityState.Unchanged;
         }
         private void CancelAction()
@@ -232,7 +241,7 @@ namespace prbd_1617_G03
 
 
         }
-        private void setPrice(int idcat, int val)
+        private void setPrice(int idcat, decimal val)
         {
             var q = from m in this.Show.PriceList
                     where m.Category.idCat == idcat
@@ -240,14 +249,14 @@ namespace prbd_1617_G03
             var res = q.FirstOrDefault();
             if (res != null)
             {
-                res.price = val;
+                res.price = val;   
             }
             else {
                 PriceList price = new PriceList();
                 price.Show = this.Show;
                 price.Category=App.Model.Category.Find(idcat);
-                res.price = val;
-                Show.PriceList.Add(price);
+                price.price = val;
+                Show.PriceList.Add(price); 
             }
             
 
