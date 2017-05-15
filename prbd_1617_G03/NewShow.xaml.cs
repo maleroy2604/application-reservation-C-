@@ -89,7 +89,7 @@ namespace prbd_1617_G03
         {
             get { return getPrice(Show.idS, 1); }
             set {
-                
+                setPrice();
             }
         }
         public decimal PriceB
@@ -230,6 +230,26 @@ namespace prbd_1617_G03
                 return priceList.price;
             }
 
+
+        }
+        private void setPrice(int idcat, int val)
+        {
+            var q = from m in this.Show.PriceList
+                    where m.Category.idCat == idcat
+                    select m;
+            var res = q.FirstOrDefault();
+            if (res != null)
+            {
+                res.price = val;
+            }
+            else {
+                PriceList price = new PriceList();
+                price.Show = this.Show;
+                price.Category=App.Model.Category.Find(idcat);
+                res.price = val;
+                Show.PriceList.Add(price);
+            }
+            
 
         }
         
