@@ -24,15 +24,13 @@ namespace prbd_1617_G03
     public partial class newShow : UserControlBase
     {
         public Show Show { get; set; }
-
+        
         public ICommand Save { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Delete { get; set; }
         public ICommand LoadImage { get; set; }
         public ICommand ClearImage { get; set; }
 
-
-        private decimal priceA, priceB, priceC;
 
 
         private bool isNew;
@@ -59,13 +57,12 @@ namespace prbd_1617_G03
                 App.Messenger.NotifyColleagues(App.MSG_NAMESHOW_CHANGED, string.IsNullOrEmpty(value) ? "<new show>" : value);
             }
         }
-        public string showDate
+        public DateTime showDate
         {
-            get { return Convert.ToString(Show.showDate); }
+            get { return Show.showDate; }
             set
             {
-
-                Show.showDate = Convert.ToDateTime(value);
+                Show.showDate = value;
                 RaisePropertyChanged(nameof(showDate));
             }
         }
@@ -91,17 +88,21 @@ namespace prbd_1617_G03
         public decimal PriceA
         {
             get { return getPrice(Show.idS, 1); }
-            set { priceA = value; }
+            set {
+                
+            }
         }
         public decimal PriceB
         {
-            get;
-            set;
+            get { return getPrice(Show.idS, 2); }
+            set { 
+            }
         }
         public decimal PriceC
         {
-            get;
-            set;
+            get { return getPrice(Show.idS, 3); }
+            set { 
+            }
         }
 
 
@@ -151,7 +152,7 @@ namespace prbd_1617_G03
             if (IsNew)
             {
                 showName = null;
-                showDate = null;
+                //showDate = null;
                 description = null;
                 poster = null;
 
@@ -208,8 +209,10 @@ namespace prbd_1617_G03
         }
         private void DeleteAction()
         {
-            App.Model.Show.Remove(Show);
 
+            Show.Reservations.Clear();
+            Show.PriceList.Clear();
+            App.Model.Show.Remove(Show);
             App.Model.SaveChanges();
             App.Messenger.NotifyColleagues(App.MSG_SHOW_CHANGED, Show);
             App.Messenger.NotifyColleagues(App.MSG_CLOSE_TAB, Parent);
@@ -218,7 +221,7 @@ namespace prbd_1617_G03
         {
 
             PriceList priceList = App.Model.PriceList.Find(idS, cat);
-            if (priceList.price)
+            if (priceList == null)
             {
                 return 0;
             }
@@ -229,6 +232,7 @@ namespace prbd_1617_G03
 
 
         }
+        
     }
 }
 

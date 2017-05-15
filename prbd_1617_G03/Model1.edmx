@@ -210,7 +210,7 @@
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="poster" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="PriceList" Relationship="Self.FK_PriceList_Show" FromRole="Show" ToRole="PriceList" />
-          <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Show" FromRole="Show" ToRole="Reservation" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_Show" FromRole="Show" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="User">
           <Key>

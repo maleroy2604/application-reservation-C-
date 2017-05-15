@@ -28,7 +28,9 @@
         <TextBox x:Name="txtShowName" Grid.Column="1" Text="{Binding showName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  IsReadOnly="{Binding Path=IsExisting}" Height="25" Margin="0,2,383,2" />
         <!-- ROW #2 -->
         <Label Content="Date :" Grid.Row="1" />
-        <DatePicker HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Width="251" Text="{Binding showDate,UpdateSourceTrigger=PropertyChanged}"/>
+        <DatePicker HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="1" 
+                    VerticalAlignment="Top" Grid.Column="1" Width="251" 
+                    SelectedDate="{Binding showDate,UpdateSourceTrigger=PropertyChanged}"/>
         <!--<TextBox Text="{Binding showDate}" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="31" />-->
         <Label Content="Description :" Grid.Row="2" />
         <TextBox Text="{Binding description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="103" Margin="0,0,159,0" />

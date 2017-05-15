@@ -18,7 +18,7 @@ namespace prbd_1617_G03
         public Show()
         {
             this.PriceList = new HashSet<PriceList>();
-            this.Reservation = new HashSet<Reservation>();
+            this.Reservations = new HashSet<Reservation>();
         }
     
         public int idS { get; set; }
@@ -30,6 +30,6 @@ namespace prbd_1617_G03
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PriceList> PriceList { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservation> Reservation { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

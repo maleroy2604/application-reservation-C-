@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="prbd_1617_G03.Model.Client" Width="1.5" PointX="6.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="prbd_1617_G03.Model.PriceList" Width="1.5" PointX="5.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="prbd_1617_G03.Model.Reservation" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="prbd_1617_G03.Model.Show" Width="1.5" PointX="3.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="prbd_1617_G03.Model.Show" Width="1.5" PointX="3.375" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="prbd_1617_G03.Model.User" Width="1.5" PointX="9.125" PointY="0.625" IsExpanded="true" />
         <AssociationConnector Association="prbd_1617_G03.Model.FK_PriceList_Category" ManuallyRouted="false" />
         <AssociationConnector Association="prbd_1617_G03.Model.FK_Reservation_Category" ManuallyRouted="false" />
