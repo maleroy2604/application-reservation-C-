@@ -1,5 +1,4 @@
-﻿
-<f:UserControlBase x:Class="prbd_1617_G03.newShow"
+﻿<f:UserControlBase x:Class="prbd_1617_G03.newShow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +8,7 @@
              xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
              xmlns:local="clr-namespace:prbd_1617_G03"
              mc:Ignorable="d" 
-             FontSize="14" d:DesignHeight="390" d:DesignWidth="528">
+             FontSize="14" d:DesignHeight="390" Width="742">
     <UserControl.Resources>
         <BitmapImage x:Key="UnknownUser" UriSource="/Images/unknow-user.jpg" />
     </UserControl.Resources>
@@ -26,14 +25,15 @@
         </Grid.RowDefinitions>
         <!-- ROW #1 -->
         <Label Content="ShowName :" />
-        <TextBox x:Name="txtShowName" Grid.Column="1" Text="{Binding showName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  IsReadOnly="{Binding Path=IsExisting}" Height="25" Margin="0,2" />
+        <TextBox x:Name="txtShowName" Grid.Column="1" Text="{Binding showName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  IsReadOnly="{Binding Path=IsExisting}" Height="25" Margin="0,2,383,2" />
         <!-- ROW #2 -->
         <Label Content="Date :" Grid.Row="1" />
-        <TextBox Text="{Binding showDate, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="31" />
+        <DatePicker HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Width="251" Text="{Binding showDate,UpdateSourceTrigger=PropertyChanged}"/>
+        <!--<TextBox Text="{Binding showDate}" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="31" />-->
         <Label Content="Description :" Grid.Row="2" />
-        <TextBox Text="{Binding description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="103" />
+        <TextBox Text="{Binding description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="103" Margin="0,0,159,0" />
         <!-- ROW #3 -->
-        <Label Content="Poster :" Grid.Row="3" Margin="0,10,0,98" />
+        <Label Content="Poster :" Grid.Row="2" Margin="0,102,0,182" Grid.RowSpan="2" />
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="78,0,10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -41,21 +41,26 @@
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" MinWidth="50" MaxWidth="250" MaxHeight="250" VerticalAlignment="Top"
                    Source="{Binding poster, FallbackValue={StaticResource UnknownUser}, TargetNullValue={StaticResource UnknownUser}}" 
-                   RenderOptions.BitmapScalingMode="Fant" Margin="0,80,0,0" Height="201" />
-            <StackPanel Grid.Column="1" Orientation="Vertical">
-                <DockPanel Height="81"/>
-                <StackPanel Margin="5,0,0,0" HorizontalAlignment="Left" Height="71">
+                   RenderOptions.BitmapScalingMode="Fant" Height="201" />
+            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5,0,-24,0" Height="170" VerticalAlignment="Top">
+                <StackPanel Margin="5,0,0,0" HorizontalAlignment="Left" Height="54">
                     <Button x:Name="btnClear" Content="Clear" Width="75" VerticalAlignment="Top" Command="{Binding ClearImage}" Margin="0,0,0,5"/>
                     <Button x:Name="btnLoad" Content="Load" Width="75" VerticalAlignment="Top" Command="{Binding LoadImage}" Margin="0,0,0,5"/>
                 </StackPanel>
-            </StackPanel>
+                <WrapPanel Height="82" Margin="0,0,202,0" RenderTransformOrigin="0.713,-0.476">
+                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text=" Category A : "  />
+                    <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap"  Width="115" Margin="0,0,0,5" Text="{Binding PriceA}"/>
+                    <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text=" Category B : "/>
+                    <TextBox x:Name="textBox1" Height="23" TextWrapping="Wrap" Text="{Binding PriceB}" Width="115" Margin="0,0,0,5"/>
+                    <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text=" Category C : "/>
+                    <TextBox x:Name="textBox2" Height="23" TextWrapping="Wrap" Text="{Binding PriceC}" Width="115" Margin="0,0,0,5"/>
+            </WrapPanel>
+        </StackPanel>
         </Grid>
-        <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="166" Height="50">
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="166" Height="50" Margin="0,0,217,10">
             <Button x:Name="btnCancel" Content="Cancel" Command="{Binding Cancel}" Width="auto" Padding="5,1"/>
             <Button x:Name="btnSave" Content="Save" Command="{Binding Save}" Width="auto" Margin="10,0,0,0" Padding="5,1"/>
             <Button x:Name="btnDelete" Content="Delete" Command="{Binding Delete}" Width="auto" Margin="10,0,0,0" Padding="5,1"/>
         </WrapPanel>
-
-
-    </Grid>
+       </Grid>
 </f:UserControlBase>

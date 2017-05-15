@@ -10,7 +10,7 @@
     <TabControl x:Name="tabControl" Margin="10" Grid.Row="1">
         <TabItem x:Name="MenuAdmin" Header="Menu Admin">
             <ContentControl>
-                <local:MenuAdminView/>
+                <local:ViewShow/>
             </ContentControl>
         </TabItem>
     </TabControl>

@@ -56,11 +56,7 @@ namespace prbd_1617_G03
                                    {
                                        var show = App.Model.Show.Create();
                                        newTabForShow(show, true);
-                                       //var tab = new TabItem()
-                                       //{
-                                       //    Header = "NEW SHOW",
-                                       //    Content = new newShow(show, true)
-                                       //};
+                                       
 
                                        
                                    });

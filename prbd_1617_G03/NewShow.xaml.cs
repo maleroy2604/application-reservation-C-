@@ -2,6 +2,7 @@
 using PRBD_Framework;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Drawing.Imaging;
 using System.IO;
@@ -23,13 +24,20 @@ namespace prbd_1617_G03
     public partial class newShow : UserControlBase
     {
         public Show Show { get; set; }
+
         public ICommand Save { get; set; }
-        public ICommand Cancel { get; set;}
+        public ICommand Cancel { get; set; }
         public ICommand Delete { get; set; }
         public ICommand LoadImage { get; set; }
         public ICommand ClearImage { get; set; }
+
+
+        private decimal priceA, priceB, priceC;
+
+
         private bool isNew;
         public bool IsExisting { get { return !IsNew; } }
+
         public bool IsNew
         {
             get { return isNew; }
@@ -56,6 +64,7 @@ namespace prbd_1617_G03
             get { return Convert.ToString(Show.showDate); }
             set
             {
+
                 Show.showDate = Convert.ToDateTime(value);
                 RaisePropertyChanged(nameof(showDate));
             }
@@ -79,31 +88,53 @@ namespace prbd_1617_G03
                 RaisePropertyChanged(nameof(poster));
             }
         }
+        public decimal PriceA
+        {
+            get { return getPrice(Show.idS, 1); }
+            set { priceA = value; }
+        }
+        public decimal PriceB
+        {
+            get;
+            set;
+        }
+        public decimal PriceC
+        {
+            get;
+            set;
+        }
 
-        public newShow(Show show ,bool isNew)
+
+
+        public newShow(Show show, bool isNew)
         {
             InitializeComponent();
+            DataContext = this;
             Show = show;
             IsNew = isNew;
-            Save = new RelayCommand(SaveAction,CanSaveOrCancelAction);
-            Cancel = new RelayCommand(CancelAction, CanSaveOrCancelAction);
-            LoadImage = new RelayCommand(LoadImageAction);
-            ClearImage= new RelayCommand(ClearImageAction);
-            Delete = new RelayCommand(DeleteAction, () => { return IsExisting; });
 
-            DataContext = this;
+
+            Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
+            Cancel = new RelayCommand(CancelAction, CanSaveOrCancelAction);
+            Delete = new RelayCommand(DeleteAction, () => { return IsExisting; });
+            LoadImage = new RelayCommand(LoadImageAction);
+            ClearImage = new RelayCommand(ClearImageAction);
+
+
 
         }
         private void SaveAction()
         {
-            if(IsNew)
+            if (IsNew)
             {
 
                 App.Model.Show.Add(Show);
+
                 IsNew = false;
             }
             App.Model.SaveChanges();
-            App.Messenger.NotifyColleagues(App.MSG_SHOW_CHANGED,Show);
+            App.Messenger.NotifyColleagues(App.MSG_SHOW_CHANGED, Show);
+            App.Messenger.NotifyColleagues(App.MSG_CLOSE_TAB, Parent);
 
         }
         private bool CanSaveOrCancelAction()
@@ -119,11 +150,11 @@ namespace prbd_1617_G03
         {
             if (IsNew)
             {
-               showName = null;
-               showDate = null;
-               description = null;
-               poster= null;
-            
+                showName = null;
+                showDate = null;
+                description = null;
+                poster = null;
+
                 RaisePropertyChanged(nameof(Show));
             }
             else
@@ -170,20 +201,35 @@ namespace prbd_1617_G03
         }
         private void ClearImageAction()
         {
-            
+
             Show.poster = null;
             RaisePropertyChanged(nameof(poster));
-        
+
         }
         private void DeleteAction()
         {
             App.Model.Show.Remove(Show);
+
             App.Model.SaveChanges();
             App.Messenger.NotifyColleagues(App.MSG_SHOW_CHANGED, Show);
             App.Messenger.NotifyColleagues(App.MSG_CLOSE_TAB, Parent);
         }
+        private decimal getPrice(int idS, int cat)
+        {
 
+            PriceList priceList = App.Model.PriceList.Find(idS, cat);
+            if (priceList.price)
+            {
+                return 0;
+            }
+            else
+            {
+                return priceList.price;
+            }
+
+
+        }
     }
-    }
-    
+}
+
 

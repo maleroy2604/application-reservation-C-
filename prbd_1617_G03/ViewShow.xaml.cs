@@ -22,6 +22,8 @@ namespace prbd_1617_G03
         public ICommand NewShow { get; set; }
         public ICommand ShowDisplay { get; set; }
         private ObservableCollection<Show> shows;
+       
+
         public ObservableCollection<Show> Shows
         {
             get
@@ -63,14 +65,14 @@ namespace prbd_1617_G03
         }
 
         public ICommand ClearFilter { get; set; }
-        
+
         private void ApplyFilterAction()
         {
-           
+
             var model = new Entities();
             var query = from m in App.Model.Show
                         where
-                            m.showName.Contains(Filter) 
+                            m.showName.Contains(Filter)
                         select m;
             Shows = new ObservableCollection<Show>(query);
         }
@@ -80,7 +82,7 @@ namespace prbd_1617_G03
             if (!string.IsNullOrEmpty(Filter))
                 query = from m in App.Model.Show
                         where
-                            m.showName.Contains(Filter) || m.description.Contains(Filter)
+                            m.showName.Contains(Filter) || m.description.Contains(Filter) 
                         select m;
             Shows = new ObservableCollection<Show>(query);
         }

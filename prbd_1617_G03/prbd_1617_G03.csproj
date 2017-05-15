@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{875350BE-6E5B-4511-B9A2-506C6E04C735}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>prbd_1617_G03</RootNamespace>
     <AssemblyName>prbd_1617_G03</AssemblyName>
@@ -94,9 +94,6 @@
     </Compile>
     <Compile Include="LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MenuAdminView.xaml.cs">
-      <DependentUpon>MenuAdminView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model1.cs">
       <AutoGen>True</AutoGen>
@@ -203,10 +200,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoginView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MenuAdminView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
