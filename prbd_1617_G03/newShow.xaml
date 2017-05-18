@@ -31,20 +31,24 @@
         <DatePicker HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="1" 
                     VerticalAlignment="Top" Grid.Column="1" Width="251" 
                     SelectedDate="{Binding showDate,UpdateSourceTrigger=PropertyChanged}"/>
-        <!--<TextBox Text="{Binding showDate}" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="31" />-->
+
         <Label Content="Description :" Grid.Row="2" />
         <TextBox Text="{Binding description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="71" Margin="0,0,159,0" />
+
+        <StackPanel Orientation="Horizontal"/>
         <!-- ROW #3 -->
-        <Label Content="Poster :" Grid.Row="3" Margin="0,22,0,155" />
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="78,0,10,0">
+        <Label Content="Poster :" Grid.Row="3" Margin="0,10,0,150" />
+        <Grid Grid.Row="4" Grid.ColumnSpan="2" Margin="78,0,10,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="227.794"/>
+                <ColumnDefinition Width="17*"/>
+                <ColumnDefinition Width="79*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" MinWidth="50" MaxWidth="250" MaxHeight="250" VerticalAlignment="Top"
+            <Image Grid.Column="1" MinWidth="50" MaxWidth="250" MaxHeight="250" VerticalAlignment="Top"
                    Source="{Binding poster, FallbackValue={StaticResource UnknownUser}, TargetNullValue={StaticResource UnknownUser}}" 
-                   RenderOptions.BitmapScalingMode="Fant" Height="189" Margin="0,32,0,-19" />
-            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,32,-29,0" Height="170" VerticalAlignment="Top">
+                   RenderOptions.BitmapScalingMode="Fant" Height="189" Margin="4,13,67,-14" Grid.ColumnSpan="2" />
+            <StackPanel Grid.Column="2" Orientation="Vertical" Margin="10,18,-29,0" Height="170" VerticalAlignment="Top" Grid.ColumnSpan="2">
                 <StackPanel Margin="5,0,0,0" HorizontalAlignment="Left" Height="54">
                     <Button x:Name="btnClear" Content="Clear" Width="75" VerticalAlignment="Top" Command="{Binding ClearImage}" Margin="0,0,0,5" RenderTransformOrigin="0.5,0.5">
                         <Button.RenderTransform>
@@ -68,10 +72,14 @@
                 </WrapPanel>
             </StackPanel>
         </Grid>
-        <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="166" Height="28" Margin="0,0,214,0">
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="111" Height="53" Margin="0,0,264,-18">
             <Button x:Name="btnCancel" Content="Cancel" Command="{Binding Cancel}" Width="auto" Padding="5,1"/>
             <Button x:Name="btnSave" Content="Save" Command="{Binding Save}" Width="auto" Margin="10,0,0,0" Padding="5,1"/>
-            <Button x:Name="btnDelete" Content="Delete" Command="{Binding Delete}" Width="auto" Margin="10,0,0,0" Padding="5,1"/>
+            <Button x:Name="btnDelete" Content="Delete" Command="{Binding Delete}" Width="auto" Margin="10,0,0,0" Padding="5,1" RenderTransformOrigin="2.367,-0.38"/>
         </WrapPanel>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal"/>
+        </StackPanel>
+        <Button Content="Liste de reservation" Grid.Column="1" HorizontalAlignment="Left" Margin="5,91,0,0" Grid.Row="2" VerticalAlignment="Top" Width="152"/>
     </Grid>
 </f:UserControlBase>

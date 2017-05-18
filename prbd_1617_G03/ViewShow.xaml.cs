@@ -86,6 +86,8 @@ namespace prbd_1617_G03
                         select m;
             Shows = new ObservableCollection<Show>(query);
         }
+
+        
     }
    
 }

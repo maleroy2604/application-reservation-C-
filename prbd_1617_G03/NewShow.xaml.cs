@@ -30,10 +30,10 @@ namespace prbd_1617_G03
         public ICommand Delete { get; set; }
         public ICommand LoadImage { get; set; }
         public ICommand ClearImage { get; set; }
-        //List<Client> ClientRes
-        //{
-        //    get { return getClient(Show.idS); }
-        //}
+        public ICommand ClearFilter { get; set; }
+
+
+        private bool priceModified ;
 
         private bool isNew;
         public bool IsExisting { get { return !IsNew; } }
@@ -92,7 +92,7 @@ namespace prbd_1617_G03
             get { return getPrice(Show.idS, 1); }
             set {
                 setPrice(1,value);
-               
+                priceModified = true;
             }
         }
         public decimal PriceB
@@ -100,7 +100,7 @@ namespace prbd_1617_G03
             get { return getPrice(Show.idS, 2); }
             set {
                 setPrice(2, value);
-                
+                priceModified = true;
             }
         }
         public decimal PriceC
@@ -108,7 +108,7 @@ namespace prbd_1617_G03
             get { return getPrice(Show.idS, 3); }
             set {
                 setPrice(3, value);
-                
+                priceModified = true;
             }
         }
 
@@ -120,9 +120,9 @@ namespace prbd_1617_G03
             DataContext = this;
             Show = show;
             IsNew = isNew;
+            priceModified = false;
 
-            getClient(Show.idS);
-            Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
+             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Cancel = new RelayCommand(CancelAction, CanSaveOrCancelAction);
             Delete = new RelayCommand(DeleteAction, () => { return IsExisting; });
             LoadImage = new RelayCommand(LoadImageAction);
@@ -154,9 +154,7 @@ namespace prbd_1617_G03
                           select c).FirstOrDefault();
 
 
-
-
-            return change != null && change.State != EntityState.Unchanged;
+            return priceModified || change != null && change.State != EntityState.Unchanged;
         }
         private void CancelAction()
         {
@@ -263,15 +261,8 @@ namespace prbd_1617_G03
             
 
         }
-        private List<Client> getClient(int ids)
-        {
+        
 
-
-            return from m in this.Show.Reservations
-                   where m.numS == ids
-                   select m.Client;
-            
-        }
         
     }
 }
