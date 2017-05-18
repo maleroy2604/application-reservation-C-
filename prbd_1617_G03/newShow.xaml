@@ -33,9 +33,9 @@
                     SelectedDate="{Binding showDate,UpdateSourceTrigger=PropertyChanged}"/>
         <!--<TextBox Text="{Binding showDate}" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="31" />-->
         <Label Content="Description :" Grid.Row="2" />
-        <TextBox Text="{Binding description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="103" Margin="0,0,159,0" />
+        <TextBox Text="{Binding description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="71" Margin="0,0,159,0" />
         <!-- ROW #3 -->
-        <Label Content="Poster :" Grid.Row="2" Margin="0,102,0,182" Grid.RowSpan="2" />
+        <Label Content="Poster :" Grid.Row="3" Margin="0,22,0,155" />
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="78,0,10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -43,10 +43,19 @@
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" MinWidth="50" MaxWidth="250" MaxHeight="250" VerticalAlignment="Top"
                    Source="{Binding poster, FallbackValue={StaticResource UnknownUser}, TargetNullValue={StaticResource UnknownUser}}" 
-                   RenderOptions.BitmapScalingMode="Fant" Height="201" />
-            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5,0,-24,0" Height="170" VerticalAlignment="Top">
+                   RenderOptions.BitmapScalingMode="Fant" Height="189" Margin="0,32,0,-19" />
+            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,32,-29,0" Height="170" VerticalAlignment="Top">
                 <StackPanel Margin="5,0,0,0" HorizontalAlignment="Left" Height="54">
-                    <Button x:Name="btnClear" Content="Clear" Width="75" VerticalAlignment="Top" Command="{Binding ClearImage}" Margin="0,0,0,5"/>
+                    <Button x:Name="btnClear" Content="Clear" Width="75" VerticalAlignment="Top" Command="{Binding ClearImage}" Margin="0,0,0,5" RenderTransformOrigin="0.5,0.5">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="2.291"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.46"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
                     <Button x:Name="btnLoad" Content="Load" Width="75" VerticalAlignment="Top" Command="{Binding LoadImage}" Margin="0,0,0,5"/>
                 </StackPanel>
                 <WrapPanel Height="82" Margin="0,0,202,0" RenderTransformOrigin="0.713,-0.476">
@@ -56,13 +65,13 @@
                     <TextBox x:Name="textBox1" Height="23" TextWrapping="Wrap" Text="{Binding PriceB,UpdateSourceTrigger=PropertyChanged}" Width="115" Margin="0,0,0,5"/>
                     <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text=" Category C : "/>
                     <TextBox x:Name="textBox2" Height="23" TextWrapping="Wrap" Text="{Binding PriceC,UpdateSourceTrigger=PropertyChanged}" Width="115" Margin="0,0,0,5"/>
-            </WrapPanel>
-        </StackPanel>
+                </WrapPanel>
+            </StackPanel>
         </Grid>
-        <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="166" Height="50" Margin="0,0,217,10">
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="166" Height="28" Margin="0,0,214,0">
             <Button x:Name="btnCancel" Content="Cancel" Command="{Binding Cancel}" Width="auto" Padding="5,1"/>
             <Button x:Name="btnSave" Content="Save" Command="{Binding Save}" Width="auto" Margin="10,0,0,0" Padding="5,1"/>
             <Button x:Name="btnDelete" Content="Delete" Command="{Binding Delete}" Width="auto" Margin="10,0,0,0" Padding="5,1"/>
         </WrapPanel>
-       </Grid>
+    </Grid>
 </f:UserControlBase>

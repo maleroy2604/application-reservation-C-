@@ -30,8 +30,10 @@ namespace prbd_1617_G03
         public ICommand Delete { get; set; }
         public ICommand LoadImage { get; set; }
         public ICommand ClearImage { get; set; }
-
-
+        //List<Client> ClientRes
+        //{
+        //    get { return getClient(Show.idS); }
+        //}
 
         private bool isNew;
         public bool IsExisting { get { return !IsNew; } }
@@ -118,8 +120,8 @@ namespace prbd_1617_G03
             DataContext = this;
             Show = show;
             IsNew = isNew;
-            
 
+            getClient(Show.idS);
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Cancel = new RelayCommand(CancelAction, CanSaveOrCancelAction);
             Delete = new RelayCommand(DeleteAction, () => { return IsExisting; });
@@ -260,6 +262,15 @@ namespace prbd_1617_G03
             }
             
 
+        }
+        private List<Client> getClient(int ids)
+        {
+
+
+            return from m in this.Show.Reservations
+                   where m.numS == ids
+                   select m.Client;
+            
         }
         
     }
