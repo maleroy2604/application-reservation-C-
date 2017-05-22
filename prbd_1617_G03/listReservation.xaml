@@ -1,0 +1,48 @@
+﻿<f:UserControlBase x:Class="prbd_1617_G03.listReservation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             xmlns:local="clr-namespace:prbd_1617_G03"
+             mc:Ignorable="d" 
+             FontSize="14" d:DesignHeight="390" d:DesignWidth="528">
+
+    <Grid Margin="0,10,10,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="List of all Clients of this show" FontSize="16" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal"/>
+            <ListView x:Name="ListView" ItemsSource="{Binding clients}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding ShowClient}"
+                                        CommandParameter="{Binding ElementName=ListView, Path=SelectedItem}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock FontSize="14"  TextAlignment="Center" Text="{Binding clientName}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Content="New Reservation" Command="{Binding NewShow}" Margin="100,0,82,0"
+                    />
+        </StackPanel>
+        <Button Content="Clear" Command="{Binding ClearFilter}" Grid.Column="1" Margin="44,10,55,40" RenderTransformOrigin="0.471,0.841"/>
+
+    </Grid>
+</f:UserControlBase>

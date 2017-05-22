@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PRBD_Framework;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,19 +16,18 @@ using System.Windows.Shapes;
 
 namespace prbd_1617_G03
 {
-    /// <summary>
-    /// Logique d'interaction pour VendorMenuView.xaml
-    /// </summary>
-    public partial class VendorMenuView : Window
+    
+    public partial class listReservation : UserControlBase
     {
-        public VendorMenuView()
+        //IObservable<Client> clients;
+        IObservable<Client> Clients { get; set; }
+
+        public listReservation(ObservableCollection<Client> clients)
         {
+
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

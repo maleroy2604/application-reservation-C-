@@ -24,7 +24,7 @@ namespace prbd_1617_G03
     public partial class newShow : UserControlBase
     {
         public Show Show { get; set; }
-        
+        public ICommand ListRes{get; set;}
         public ICommand Save { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Delete { get; set; }
@@ -91,8 +91,10 @@ namespace prbd_1617_G03
         {
             get { return getPrice(Show.idS, 1); }
             set {
+                Console.WriteLine("setter");
                 setPrice(1,value);
                 priceModified = true;
+                RaisePropertyChanged(nameof(PriceA));
             }
         }
         public decimal PriceB
@@ -122,12 +124,13 @@ namespace prbd_1617_G03
             IsNew = isNew;
             priceModified = false;
 
-             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
+            Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Cancel = new RelayCommand(CancelAction, CanSaveOrCancelAction);
             Delete = new RelayCommand(DeleteAction, () => { return IsExisting; });
             LoadImage = new RelayCommand(LoadImageAction);
             ClearImage = new RelayCommand(ClearImageAction);
-
+            ObservableCollection<Client> Clients = getClient();
+            ListRes =  new RelayCommand(() => { App.Messenger.NotifyColleagues(App.MSG_DISPLAY_RES,Clients); });
 
 
         }
@@ -229,15 +232,14 @@ namespace prbd_1617_G03
         private decimal getPrice(int idS, int cat)
         {
 
-            PriceList priceList = App.Model.PriceList.Find(idS, cat);
-            if (priceList == null)
+            ICollection<PriceList> priceList = Show.PriceList;
+            foreach(PriceList p in priceList)
             {
-                return 0;
+                if (p.Category.idCat == cat)
+                    return p.price;
             }
-            else
-            {
-                return priceList.price;
-            }
+            return 0;
+           
 
 
         }
@@ -260,6 +262,14 @@ namespace prbd_1617_G03
             }
             
 
+        }
+        private ObservableCollection<Client> getClient()
+        {
+            var q = (from m in this.Show.Reservations 
+                    join c in App.Model.Client on m.numC equals c.idC
+                    where m.numS == this.Show.idS
+                    select c).Distinct();
+            return new ObservableCollection<Client>(q);
         }
         
 

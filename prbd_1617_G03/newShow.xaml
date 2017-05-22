@@ -80,6 +80,6 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal"/>
         </StackPanel>
-        <Button Content="Liste de reservation" Grid.Column="1" HorizontalAlignment="Left" Margin="5,91,0,0" Grid.Row="2" VerticalAlignment="Top" Width="152"/>
+        <Button  Command="{Binding ListRes}" Content="Liste de reservation" Grid.Column="1" HorizontalAlignment="Left" Margin="5,91,0,0" Grid.Row="2" VerticalAlignment="Top" Width="152"  />
     </Grid>
 </f:UserControlBase>

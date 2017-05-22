@@ -74,17 +74,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="listReservation.xaml.cs">
+      <DependentUpon>listReservation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="newShow.xaml.cs">
       <DependentUpon>newShow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PriceViewShow.xaml.cs">
-      <DependentUpon>PriceViewShow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewClient.xaml.cs">
-      <DependentUpon>ViewClient.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewShow.xaml.cs">
       <DependentUpon>ViewShow.xaml</DependentUpon>
@@ -118,9 +115,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="VendorMenuView.xaml.cs">
-      <DependentUpon>VendorMenuView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +180,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="listReservation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,23 +192,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PriceViewShow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewClient.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ViewShow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoginView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VendorMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
