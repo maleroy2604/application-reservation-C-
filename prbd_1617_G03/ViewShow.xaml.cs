@@ -56,7 +56,7 @@ namespace prbd_1617_G03
 
             ClearFilter = new RelayCommand(() => { Filter = ""; });
             NewShow = new RelayCommand(() => { App.Messenger.NotifyColleagues(App.MSG_NEW_SHOW); });
-            App.Messenger.Register<Show>(App.MSG_SHOW_CHANGED, show => { ApplyFilterActionbis(); });
+            App.Messenger.Register<Show>(App.MSG_SHOW_CHANGED, show => { ApplyFilterAction(); });
             ShowDisplay = new RelayCommand<Show>(m => { App.Messenger.NotifyColleagues(App.MSG_DISPLAY_SHOW, m); });
             InitializeComponent();
 
@@ -66,17 +66,8 @@ namespace prbd_1617_G03
 
         public ICommand ClearFilter { get; set; }
 
+        
         private void ApplyFilterAction()
-        {
-
-            var model = new Entities();
-            var query = from m in App.Model.Show
-                        where
-                            m.showName.Contains(Filter)
-                        select m;
-            Shows = new ObservableCollection<Show>(query);
-        }
-        private void ApplyFilterActionbis()
         {
             IEnumerable<Show> query = App.Model.Show;
             if (!string.IsNullOrEmpty(Filter))

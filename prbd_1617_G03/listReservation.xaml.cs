@@ -19,15 +19,30 @@ namespace prbd_1617_G03
     
     public partial class listReservation : UserControlBase
     {
-        //IObservable<Client> clients;
-        IObservable<Client> Clients { get; set; }
-
-        public listReservation(ObservableCollection<Client> clients)
+        ObservableCollection<Client> clients;
+        ObservableCollection<Client> Clients
         {
-
-            InitializeComponent();
+            get
+            {
+                return clients;
+            }
+            set
+            {
+                clients = value;
+                RaisePropertyChanged(nameof(Clients));
+            }
         }
 
-        
+        public listReservation(ObservableCollection<Client> clientsShow)
+        {
+
+            
+            clients = clientsShow;
+            InitializeComponent();
+            DataContext = this;
+
+        }
+
+       
     }
 }

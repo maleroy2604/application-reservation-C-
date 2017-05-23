@@ -265,10 +265,11 @@ namespace prbd_1617_G03
         }
         private ObservableCollection<Client> getClient()
         {
-            var q = (from m in this.Show.Reservations 
-                    join c in App.Model.Client on m.numC equals c.idC
-                    where m.numS == this.Show.idS
-                    select c).Distinct();
+            var q = (from m in this.Show.Reservations
+                     join c in App.Model.Client on m.numC equals c.idC
+                     where m.numS == this.Show.idS
+                     select c).Distinct();
+
             return new ObservableCollection<Client>(q);
         }
         
