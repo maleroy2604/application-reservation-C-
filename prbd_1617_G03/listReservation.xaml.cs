@@ -33,16 +33,26 @@ namespace prbd_1617_G03
             }
         }
 
-        public listReservation(ObservableCollection<Client> clientsShow)
+        public listReservation(Show Show)
         {
 
-            
-            clients = clientsShow;
+
+            clients = getClient(Show);
+            Console.WriteLine(Clients.Count());
             InitializeComponent();
             DataContext = this;
 
         }
+        private ObservableCollection<Client> getClient(Show Show)
+        {
+            var q = (from m in Show.Reservations
+                     join c in App.Model.Client on m.numC equals c.idC
+                     where m.numS == Show.idS
+                     select c).Distinct();
 
-       
+            return new ObservableCollection<Client>(q);
+        }
+
+
     }
 }

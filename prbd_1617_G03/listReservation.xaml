@@ -24,7 +24,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock FontSize="14"  TextAlignment="Center" Text="{Binding idC}" />
+                        <TextBlock FontSize="14" FontWeight="Bold" Width="80" TextAlignment="Center" Text="{Binding clientFName}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

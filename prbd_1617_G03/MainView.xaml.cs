@@ -60,14 +60,14 @@ namespace prbd_1617_G03
 
                                        
                                    });
-            App.Messenger.Register<ObservableCollection<Client>>(App.MSG_DISPLAY_RES,
-                                   (l) =>
+            App.Messenger.Register<Show>(App.MSG_DISPLAY_RES,
+                                   show =>
                                    {
 
                                        var tab = new TabItem()
                                        {
                                            Header = "listReservation",
-                                           Content = new listReservation(l)
+                                           Content = new listReservation(show)
                                         };
             tabControl.Items.Add(tab);
             Dispatcher.InvokeAsync(() => tab.Focus());
