@@ -164,7 +164,7 @@ namespace prbd_1617_G03
             if (IsNew)
             {
                 showName = null;
-                //showDate = null;
+               
                 description = null;
                 poster = null;
 

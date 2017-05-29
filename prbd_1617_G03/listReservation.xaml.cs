@@ -85,7 +85,7 @@ namespace prbd_1617_G03
             var query = (from c in App.Model.Client
                          join r in App.Model.Reservation on c.idC equals r.numC
                          where r.numS == Show.idS
-                         select c);
+                         select c).Distinct();
             return query;
         }
         private void ApplyFilterAction()
