@@ -72,7 +72,7 @@ namespace prbd_1617_G03
         }
         public Int32 nbPlaceA
         {
-            get { return nbPlaceA; }
+            get { return getPlace(Client.); }
             set
             {
 
@@ -177,6 +177,17 @@ namespace prbd_1617_G03
             }
         }
 
+        private Int32 getPlace(int idS,int cat, int idc  )
+        {
+           Reservation reservation = App.Model.Reservation.Find(idS,cat,idc);
+            if (cat == reservation.numCat)
+            {
+                return reservation.nbr;
+            }
+            return 0;
+
+
+        }
         private decimal getPrice(int idS, int cat)
         {
             Show sh = App.Model.Show.Find(idS);
@@ -191,6 +202,7 @@ namespace prbd_1617_G03
 
 
         }
+
         private void DeleteAction()
         {
 
