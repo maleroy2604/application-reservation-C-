@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Height="300" Width="300">
     <StackPanel>
-        <TextBlock FontSize="16" FontWeight="Bold"><Run Text="List of "/><Run Text="clients"/></TextBlock>
+        <TextBlock FontSize="16" FontWeight="Bold"><Run Text="List of "/><Run Text="Client"/></TextBlock>
         <StackPanel Orientation="Horizontal">
             <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
             <Button Content="Clear" Command="{Binding ClearFilter}"/>
@@ -24,13 +24,16 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock FontSize="14"  TextAlignment="Center" Text="{Binding idC}" />
+                        <TextBlock FontSize="14" FontWeight="Bold" Width="80" TextAlignment="center" Text="{Binding clientFName}" />
+                        <TextBlock FontSize="14" FontWeight="Bold" Width="80" TextAlignment="center" Text="{Binding clientLName}" />
+                        
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Content="New Reservation" Command="{Binding NewRes}" Margin="100,0,82,0"  />
+        <Button Content="New Client" Command="{Binding NewRes}" Margin="100,0,82,0" />
+        <TextBlock x:Name="textBlock" TextWrapping="Wrap"><Run Text="Double cliquez sur un client pour "/><Run Text="voir "/><Run Text="s"/><Run Text="'est reservation"/><Run Text="s"/><Run Text=" !"/></TextBlock>
     </StackPanel>
 
 </f:UserControlBase>

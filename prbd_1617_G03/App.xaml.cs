@@ -28,6 +28,8 @@ namespace prbd_1617_G03
         public const string MSG_CLOSE_TAB = "MSG_CLOSE_TAB";
         public const string MSG_DISPLAY_SHOW="MSG_DISPLAY_SHOW";
         public const string MSG_DISPLAY_RES = "MSG_DISPLAY_RES";
+        public const string MSG_DISPLAY_CLIENT = "MSG_DISPLAY_CLIENT";
+        public const string MSG_NAMECLIENT_CHANGED = "MSG_NAMECLIENT_CHANGED";
 
         public App()
         {

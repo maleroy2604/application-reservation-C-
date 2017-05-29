@@ -19,17 +19,18 @@ namespace PRBD_Framework
         IEnumerable GetErrors(string propertyName);
         void SetErrors(Dictionary<string, ICollection<string>> errors);
         bool HasErrors { get; }
+        bool Validate();
     }
 
-    public class ErrorManager
+    public class ErrorManager : INotifyDataErrorInfo, IErrorManager
     {
         protected readonly Dictionary<string, ICollection<string>> validationErrors = new Dictionary<string, ICollection<string>>();
 
-        private EventHandler<DataErrorsChangedEventArgs> errorsChanged;
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         public ErrorManager(EventHandler<DataErrorsChangedEventArgs> errorsChanged = null)
         {
-            this.errorsChanged = errorsChanged;
+            this.ErrorsChanged = errorsChanged;
         }
 
         public void AddError(string propertyName, string error)
@@ -66,7 +67,7 @@ namespace PRBD_Framework
 
         public void RaiseErrorsChanged(string propertyName)
         {
-            errorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
         public IEnumerable GetErrors(string propertyName)
@@ -99,9 +100,12 @@ namespace PRBD_Framework
                 return false;
             }
         }
+
         public Dictionary<string, ICollection<string>> GetErrors()
         {
             return validationErrors;
         }
+
+        public virtual bool Validate() { return true; }
     }
 }

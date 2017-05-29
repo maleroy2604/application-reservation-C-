@@ -91,7 +91,7 @@ namespace prbd_1617_G03
         {
             get { return getPrice(Show.idS, 1); }
             set {
-                Console.WriteLine("setter");
+               
                 setPrice(1,value);
                 priceModified = true;
                 RaisePropertyChanged(nameof(PriceA));
@@ -129,8 +129,8 @@ namespace prbd_1617_G03
             Delete = new RelayCommand(DeleteAction, () => { return IsExisting; });
             LoadImage = new RelayCommand(LoadImageAction);
             ClearImage = new RelayCommand(ClearImageAction);
-            ObservableCollection<Client> Clients = getClient();
-            ListRes =  new RelayCommand(() => { App.Messenger.NotifyColleagues(App.MSG_DISPLAY_RES,Clients); });
+            
+            ListRes =  new RelayCommand<Show>(s => { App.Messenger.NotifyColleagues(App.MSG_DISPLAY_CLIENT, Show); });
 
 
         }
@@ -263,15 +263,7 @@ namespace prbd_1617_G03
             
 
         }
-        private ObservableCollection<Client> getClient()
-        {
-            var q = (from m in this.Show.Reservations
-                     join c in App.Model.Client on m.numC equals c.idC
-                     where m.numS == this.Show.idS
-                     select c).Distinct();
-
-            return new ObservableCollection<Client>(q);
-        }
+        
         
 
         

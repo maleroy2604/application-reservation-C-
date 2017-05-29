@@ -38,19 +38,28 @@ namespace prbd_1617_G03
 
                                         Dispatcher.InvokeAsync(() => tab.Focus());
                                     });
-            App.Messenger.Register(App.MSG_VIEW_PRICE,
-                                   () =>
-                                   {
+            App.Messenger.Register<Show>(App.MSG_DISPLAY_CLIENT,
+                                    show =>
+                                    {
 
-                                       var tab = new TabItem()
-                                       {
-                                           Header = "PRICE"
-                                       };
-
-                                       tabControl.Items.Add(tab);
-
-                                       Dispatcher.InvokeAsync(() => tab.Focus());
-                                   });
+                                        var tab = new TabItem()
+                                        {
+                                            Header = "listReservation",
+                                            Content = new listReservation(show)
+                                        };
+                                        tab.MouseDown += (o, e) =>
+                                        {
+                                            if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Pressed)
+                                                tabControl.Items.Remove(o);
+                                        };
+                                        tab.KeyDown += (o, e) =>
+                                        {
+                                            if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
+                                                tabControl.Items.Remove(o);
+                                        };
+                                        tabControl.Items.Add(tab);
+                                        Dispatcher.InvokeAsync(() => tab.Focus());
+                                    });
             App.Messenger.Register(App.MSG_NEW_SHOW,
                                    () =>
                                    {
@@ -60,18 +69,21 @@ namespace prbd_1617_G03
 
                                        
                                    });
-            App.Messenger.Register<ObservableCollection<Client>>(App.MSG_DISPLAY_RES,
-                                   (l) =>
-                                   {
 
-                                       var tab = new TabItem()
+            App.Messenger.Register<Client>(App.MSG_DISPLAY_RES,
+                                   client =>
+                                   {
+                                       if (client != null)
                                        {
-                                           Header = "listReservation",
-                                           Content = new listReservation(l)
-                                        };
-            tabControl.Items.Add(tab);
-            Dispatcher.InvokeAsync(() => tab.Focus());
-        });
+                                           var tab = (from TabItem t in tabControl.Items where (string)t.Header == client.clientLName+client.clientFName select t).FirstOrDefault();
+                                           if (tab == null)
+                                               newTabForClient(client, false);
+                                           else
+                                               Dispatcher.InvokeAsync(() => tab.Focus());
+                                       }
+
+
+                                   });
 
             App.Messenger.Register<string>(App.MSG_NAMESHOW_CHANGED, (s) =>
             {
@@ -114,7 +126,26 @@ namespace prbd_1617_G03
             tabControl.Items.Add(tab);
             Dispatcher.InvokeAsync(() => tab.Focus());
         }
-
+        private void newTabForClient(Client cl, bool isNew)
+        {
+            var tab = new TabItem()
+            {
+                Header = isNew ? "<new show>" : cl.clientFName,
+                Content = new newRes(cl, isNew)
+            };
+            tab.MouseDown += (o, e) =>
+            {
+                if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Pressed)
+                    tabControl.Items.Remove(o);
+            };
+            tab.KeyDown += (o, e) =>
+            {
+                if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
+                    tabControl.Items.Remove(o);
+            };
+            tabControl.Items.Add(tab);
+            Dispatcher.InvokeAsync(() => tab.Focus());
+        }
 
     }
         

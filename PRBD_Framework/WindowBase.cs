@@ -66,6 +66,11 @@ namespace PRBD_Framework
             this.errors.SetErrors(errors);
         }
 
+        public bool Validate()
+        {
+            return errors.Validate();
+        }
+
         public bool HasErrors
         {
             get
