@@ -74,6 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="infoClient.cs" />
     <Compile Include="listReservation.xaml.cs">
       <DependentUpon>listReservation.xaml</DependentUpon>
     </Compile>

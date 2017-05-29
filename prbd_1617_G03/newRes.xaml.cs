@@ -18,6 +18,7 @@ namespace prbd_1617_G03
     
     public partial class newRes : UserControlBase
     {
+        public infoClient info { get; set; }
         public Client Client { get; set; }
         private bool isNew;
         public bool IsExisting { get { return !IsNew; } }
@@ -32,6 +33,42 @@ namespace prbd_1617_G03
                 App.Messenger.NotifyColleagues(App.MSG_NAMECLIENT_CHANGED, string.IsNullOrEmpty(value) ? "<new client>" : value);
             }
         }
+        public string nickName
+        {
+            get { return Client.clientLName; }
+            set
+            {
+                Client.clientLName = value;
+                RaisePropertyChanged(nameof(nickName));
+                
+            }
+        }
+        public DateTime? clientDate
+        {
+            get { return Client.bdd; }
+            set
+            {
+                Client.bdd = value;
+                RaisePropertyChanged(nameof(clientDate));
+            }
+        }
+        public decimal PriceA
+        {
+            get { return getPrice(info.show.idS, 1); }
+        }
+
+        public decimal PriceB
+        {
+            get { return getPrice(info.show.idS, 2);  }
+        }
+        public decimal PriceC
+        {
+            get { return getPrice(info.show.idS, 3);  } 
+        }
+        public int nbPlaceA { get; set; }
+        public int nbPlaceB { get; set; }
+        public int nbPlaceC { get; set; }
+
         public bool IsNew
         {
             get { return isNew; }
@@ -43,13 +80,29 @@ namespace prbd_1617_G03
             }
 
         }
-        public newRes(Client cl, bool isNew)
+        public newRes(infoClient cl, bool isNew)
         {
             InitializeComponent();
             DataContext = this;
-            Client = cl;
+            Client = cl.client;
+            info = cl;
             IsNew = isNew;
             
         }
+        private decimal getPrice(int idS, int cat)
+        {
+            Show sh=App.Model.Show.Find(idS);
+            ICollection<PriceList> priceList = sh.PriceList;
+            foreach (PriceList p in priceList)
+            {
+                if (p.Category.idCat == cat)
+                    return p.price;
+            }
+            return 0;
+
+
+
+        }
+
     }
 }

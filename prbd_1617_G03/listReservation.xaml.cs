@@ -45,7 +45,7 @@ namespace prbd_1617_G03
             {
                 filter = value;
                 ApplyFilterAction();
-                RaisePropertyChanged(nameof(Filter));
+                RaisePropertyChanged(nameof(Clients));
             }
         }
 
@@ -75,7 +75,7 @@ namespace prbd_1617_G03
            Show = show;
            ClearFilter = new RelayCommand(() => { Filter = ""; });
            Clients =new ObservableCollection<Client>(getBookedClients());
-           ResDisplay = new RelayCommand<Client>(m => { App.Messenger.NotifyColleagues(App.MSG_DISPLAY_RES, m); });
+           ResDisplay = new RelayCommand<Client>(m => { App.Messenger.NotifyColleagues(App.MSG_DISPLAY_RES, new infoClient(m,show)); });
 
 
         }
@@ -90,8 +90,12 @@ namespace prbd_1617_G03
         }
         private void ApplyFilterAction()
         {
-            IEnumerable<Client> query = App.Model.Client;
-                                         
+            IEnumerable<Client> query = (from c in App.Model.Client
+                                         join r in App.Model.Reservation on c.idC equals r.numC
+                                         where r.numS == Show.idS
+                                         select c);
+
+            
             if (!string.IsNullOrEmpty(Filter))
                 query = from m in App.Model.Client
                         where

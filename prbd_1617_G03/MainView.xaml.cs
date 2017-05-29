@@ -70,14 +70,14 @@ namespace prbd_1617_G03
                                        
                                    });
 
-            App.Messenger.Register<Client>(App.MSG_DISPLAY_RES,
-                                   client =>
+            App.Messenger.Register<infoClient>(App.MSG_DISPLAY_RES,
+                                   info =>
                                    {
-                                       if (client != null)
+                                       if (info != null)
                                        {
-                                           var tab = (from TabItem t in tabControl.Items where (string)t.Header == client.clientLName+client.clientFName select t).FirstOrDefault();
+                                           var tab = (from TabItem t in tabControl.Items where (string)t.Header == info.client.clientLName+info.client.clientFName select t).FirstOrDefault();
                                            if (tab == null)
-                                               newTabForClient(client, false);
+                                               newTabForClient(info, false);
                                            else
                                                Dispatcher.InvokeAsync(() => tab.Focus());
                                        }
@@ -126,11 +126,11 @@ namespace prbd_1617_G03
             tabControl.Items.Add(tab);
             Dispatcher.InvokeAsync(() => tab.Focus());
         }
-        private void newTabForClient(Client cl, bool isNew)
+        private void newTabForClient(infoClient cl, bool isNew)
         {
             var tab = new TabItem()
             {
-                Header = isNew ? "<new show>" : cl.clientFName,
+                Header = isNew ? "<new show>" : cl.client.clientFName,
                 Content = new newRes(cl, isNew)
             };
             tab.MouseDown += (o, e) =>

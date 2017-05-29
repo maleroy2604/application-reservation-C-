@@ -44,7 +44,7 @@ namespace prbd_1617_G03
             {
                 filter = value;
                 ApplyFilterAction();
-                RaisePropertyChanged(nameof(Filter));
+                RaisePropertyChanged(nameof(Shows));
             }
         }
         public ViewShow()
