@@ -15,15 +15,12 @@ using System.Windows.Shapes;
 
 namespace prbd_1617_G03
 {
-
-    public partial class LoginView : UserControlBase
+    
+    public partial class LoginView : WindowBase
     {
-        public ICommand Login{get;set;}
-
         public LoginView()
         {
             InitializeComponent();
-            DataContext = this;
         }
     }
 }

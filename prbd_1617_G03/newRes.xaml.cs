@@ -64,17 +64,17 @@ namespace prbd_1617_G03
         {
             get {
                 
-                return getPrice(info.show.idS, 1, nbPlaceA); }
+                return getPrice(info.show.idS, App.CategoryA.idCat, nbPlaceA); }
             
         }
 
         public decimal PriceB
         {
-            get { return getPrice(info.show.idS, 2,nbPlaceB); }
+            get { return getPrice(info.show.idS, App.CategoryB.idCat,nbPlaceB); }
         }
         public decimal PriceC
         {
-            get { return getPrice(info.show.idS, 3, nbPlaceC); }
+            get { return getPrice(info.show.idS, App.CategoryC.idCat, nbPlaceC); }
         }
         public Int32 nbPlaceA
         {
