@@ -72,7 +72,7 @@
                 </WrapPanel>
             </StackPanel>
         </Grid>
-        <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="111" Height="53" Margin="0,0,264,-18">
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="197" Height="53" Margin="0,0,178,-18">
             <Button x:Name="btnCancel" Content="Cancel" Command="{Binding Cancel}" Width="auto" Padding="5,1"/>
             <Button x:Name="btnSave" Content="Save" Command="{Binding Save}" Width="auto" Margin="10,0,0,0" Padding="5,1"/>
             <Button x:Name="btnDelete" Content="Delete" Command="{Binding Delete}" Width="auto" Margin="10,0,0,0" Padding="5,1" RenderTransformOrigin="2.367,-0.38"/>
@@ -80,6 +80,7 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal"/>
         </StackPanel>
-        <Button  Command="{Binding ListRes}" Content="Liste de reservation" Grid.Column="1" HorizontalAlignment="Left" Margin="5,91,0,0" Grid.Row="2" VerticalAlignment="Top" Width="152"  />
+        <Button  Command="{Binding ListRes}" Content="Liste de Client" Grid.Column="1" HorizontalAlignment="Left" Margin="5,91,0,0" Grid.Row="2" VerticalAlignment="Top" Width="152"  />
+        <TextBlock x:Name="textBlock3" Grid.Column="1" HorizontalAlignment="Left" Margin="162,95,0,0" Grid.Row="2" TextWrapping="Wrap" Text="(client qui ont réserver pour ce spetacle)" VerticalAlignment="Top" Width="365"/>
     </Grid>
 </f:UserControlBase>

@@ -231,10 +231,12 @@ namespace prbd_1617_G03
         }
         private decimal getPrice(int idS, int cat)
         {
-
+            
             ICollection<PriceList> priceList = Show.PriceList;
             foreach(PriceList p in priceList)
             {
+                if (priceList == null)
+                    return (decimal)0;
                 if (p.Category.idCat == cat)
                     return p.price;
             }

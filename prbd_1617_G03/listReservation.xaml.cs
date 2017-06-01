@@ -3,7 +3,7 @@ using PRBD_Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,17 +23,19 @@ namespace prbd_1617_G03
     {
         public ICommand ResDisplay { get; set; }
         public ICommand ClearFilter { get; set; }
+        public ICommand newRes { get; set; }
         private ObservableCollection<Client> clients;
         public ObservableCollection<Client> Clients
         {
             get
             {
+                
                 return clients;
             }
             set
             {
                clients = value;
-                RaisePropertyChanged(nameof(Reservation));
+               RaisePropertyChanged(nameof(Clients));
             }
         }
 
@@ -66,18 +68,16 @@ namespace prbd_1617_G03
 
         public listReservation(Show show)
         {
-            InitializeComponent();
-
-
-
-            DataContext = this;
+            
 
            Show = show;
            ClearFilter = new RelayCommand(() => { Filter = ""; });
            Clients =new ObservableCollection<Client>(getBookedClients());
            ResDisplay = new RelayCommand<Client>(m => { App.Messenger.NotifyColleagues(App.MSG_DISPLAY_RES, new infoClient(m,show)); });
-
-
+            newRes= new RelayCommand(() => { App.Messenger.NotifyColleagues(App.MSG_NEW_RES,show); });
+            App.Messenger.Register<Client>(App.MSG_RES_CHANGED, client => { /*if (!Clients.Contains(client)) Clients.Add(client);*/ApplyFilterAction(); });
+            InitializeComponent();
+            DataContext = this;
         }
 
         private IQueryable<Client> getBookedClients()
@@ -85,7 +85,8 @@ namespace prbd_1617_G03
             var query = (from c in App.Model.Client
                          join r in App.Model.Reservation on c.idC equals r.numC
                          where r.numS == Show.idS
-                         select c).Distinct();
+                         
+                         select c ).Distinct();
             return query;
         }
         private void ApplyFilterAction()
@@ -93,14 +94,15 @@ namespace prbd_1617_G03
             IEnumerable<Client> query = (from c in App.Model.Client
                                          join r in App.Model.Reservation on c.idC equals r.numC
                                          where r.numS == Show.idS
-                                         select c);
+                                         select c).Distinct();
 
             
             if (!string.IsNullOrEmpty(Filter))
-                query = from m in App.Model.Client
-                        where
-                            m.clientFName.Contains(Filter) || m.clientLName.Contains(Filter)
-                        select m;
+                query = (from c in App.Model.Client
+                         join r in App.Model.Reservation on c.idC equals r.numC
+                         where r.numS == Show.idS && (c.clientFName.Contains(Filter) || c.clientLName.Contains(Filter))
+                         select c).Distinct();
+            
             Clients = new ObservableCollection<Client>(query);
         }
 

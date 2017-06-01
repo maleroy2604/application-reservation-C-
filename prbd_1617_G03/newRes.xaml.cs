@@ -24,7 +24,7 @@ namespace prbd_1617_G03
         public ICommand Save { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Delete { get; set; }
-        private bool nbModified;
+        private bool modified;
         private bool isNew;
         public bool IsExisting { get { return !IsNew; } }
 
@@ -33,9 +33,10 @@ namespace prbd_1617_G03
             get { return Client.clientFName; }
             set
             {
+                modified = true;
                 Client.clientFName = value;
                 RaisePropertyChanged(nameof(clientName));
-                App.Messenger.NotifyColleagues(App.MSG_NAMECLIENT_CHANGED, string.IsNullOrEmpty(value) ? "<new client>" : value);
+              
             }
         }
         public string nickName
@@ -43,6 +44,7 @@ namespace prbd_1617_G03
             get { return Client.clientLName; }
             set
             {
+                modified = true;
                 Client.clientLName = value;
                 RaisePropertyChanged(nameof(nickName));
 
@@ -53,48 +55,55 @@ namespace prbd_1617_G03
             get { return Client.bdd; }
             set
             {
+                modified = true;
                 Client.bdd = value;
                 RaisePropertyChanged(nameof(clientDate));
             }
         }
         public decimal PriceA
         {
-            get { return getPrice(info.show.idS, 1); }
+            get {
+                
+                return getPrice(info.show.idS, 1, nbPlaceA); }
+            
         }
 
         public decimal PriceB
         {
-            get { return getPrice(info.show.idS, 2); }
+            get { return getPrice(info.show.idS, 2,nbPlaceB); }
         }
         public decimal PriceC
         {
-            get { return getPrice(info.show.idS, 3); }
+            get { return getPrice(info.show.idS, 3, nbPlaceC); }
         }
         public Int32 nbPlaceA
         {
-            get { return getPlace(Client.); }
+            get { return getPlace(info.show.idS,1); }
             set
             {
-
-                nbModified = true;
+                modified = true;
+                setPlace(info.show.idS, 1, Client.idC, value);
+               
             }
         }
         public Int32 nbPlaceB
         {
-            get { return nbPlaceB; }
+            get { return getPlace(info.show.idS,2); }
             set
             {
-
-                nbModified = true;
+                modified = true;
+                setPlace(info.show.idS, 2, Client.idC, value);
+               
             }
         }
         public Int32 nbPlaceC
         {
-            get { return nbPlaceC; }
+            get { return getPlace(info.show.idS, 3); }
             set
             {
-
-                nbModified = true;
+                modified = true;
+                setPlace(info.show.idS, 3, Client.idC, value);
+              
             }
         }
 
@@ -109,7 +118,7 @@ namespace prbd_1617_G03
 
             }
 
-        }
+        } 
 
         public newRes(infoClient cl, bool isNew)
         {
@@ -118,24 +127,20 @@ namespace prbd_1617_G03
             Client = cl.client;
             info = cl;
             IsNew = isNew;
-            nbModified = false;
+           modified = false;
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Cancel = new RelayCommand(CancelAction, CanSaveOrCancelAction);
-            Delete = Delete = new RelayCommand(DeleteAction, () => { return IsExisting; });
+            Delete  = new RelayCommand(DeleteAction, () => { return IsExisting; });
 
         }
 
 
         private bool CanSaveOrCancelAction()
         {
-            if (IsNew)
-                return !string.IsNullOrEmpty(clientName) && !HasErrors;
-            var change = (from c in App.Model.ChangeTracker.Entries<Client>()
-                          where c.Entity == Client
-                          select c).FirstOrDefault();
+            
 
 
-            return nbModified || change != null && change.State != EntityState.Unchanged;
+            return modified ;
         }
 
         private void SaveAction()
@@ -148,7 +153,7 @@ namespace prbd_1617_G03
                 IsNew = false;
             }
             App.Model.SaveChanges();
-            //App.Messenger.NotifyColleagues(App.MSG_SHOW_CHANGED, Show);
+            App.Messenger.NotifyColleagues(App.MSG_RES_CHANGED, Client);
             App.Messenger.NotifyColleagues(App.MSG_CLOSE_TAB, Parent);
 
         }
@@ -177,25 +182,55 @@ namespace prbd_1617_G03
             }
         }
 
-        private Int32 getPlace(int idS,int cat, int idc  )
+        private Int32 getPlace(int idS, int cat)
         {
-           Reservation reservation = App.Model.Reservation.Find(idS,cat,idc);
-            if (cat == reservation.numCat)
+
+            ICollection<Reservation> reserv = Client.Reservation;
+            foreach (Reservation p in reserv)
             {
-                return reservation.nbr;
+                if (reserv == null)
+                    return 0;
+                if (p.Category.idCat == cat && p.Show.idS==idS)
+                    return p.nbr;
             }
             return 0;
 
 
+
         }
-        private decimal getPrice(int idS, int cat)
+        private void setPlace(int idS, int cat, int idc, int val )
+        {
+            
+            var q = from m in Client.Reservation
+                    where m.Category.idCat == cat && m.Show.idS == idS 
+                    select m;
+            var res = q.FirstOrDefault();
+
+            if (res != null)
+            {
+                res.nbr = val;
+            }
+            else
+            {
+                Reservation reserv = new Reservation();
+                reserv.Category = App.Model.Category.Find(cat);
+                reserv.Client = App.Model.Client.Find(idc);
+                reserv.Show = App.Model.Show.Find(idS);
+                reserv.nbr = val;
+                Client.Reservation.Add(reserv);
+            }
+            RaisePropertyChanged(nameof(PriceA));
+            RaisePropertyChanged(nameof(PriceB));
+            RaisePropertyChanged(nameof(PriceC));
+        }
+        private decimal getPrice(int idS, int cat, Int32 nbPlace)
         {
             Show sh = App.Model.Show.Find(idS);
             ICollection<PriceList> priceList = sh.PriceList;
             foreach (PriceList p in priceList)
             {
                 if (p.Category.idCat == cat)
-                    return p.price;
+                    return ((decimal)p.price*nbPlace);
             }
             return 0;
 
@@ -205,16 +240,15 @@ namespace prbd_1617_G03
 
         private void DeleteAction()
         {
-
-
-
+            Client.Reservation.Clear();
             App.Model.Client.Remove(Client);
             App.Model.SaveChanges();
-
+            App.Messenger.NotifyColleagues(App.MSG_RES_CHANGED, Client);
             App.Messenger.NotifyColleagues(App.MSG_CLOSE_TAB, Parent);
         }
         private void setPlace(int idcat, Int32 val)
         {
+           
             var q = from m in this.Client.Reservation
                     where m.Category.idCat == idcat
                     select m;

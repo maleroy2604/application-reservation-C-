@@ -59,16 +59,27 @@ namespace prbd_1617_G03
                                         };
                                         tabControl.Items.Add(tab);
                                         Dispatcher.InvokeAsync(() => tab.Focus());
+                                        
                                     });
-            App.Messenger.Register(App.MSG_NEW_SHOW,
-                                   () =>
+            App.Messenger.Register<Show>(App.MSG_NEW_RES,
+                                    show =>
                                    {
-                                       var show = App.Model.Show.Create();
-                                       newTabForShow(show, true);
+                                       var cl = App.Model.Client.Create();
+
+                                       newTabForClient(new infoClient(cl,show), true);
                                        
 
                                        
                                    });
+            App.Messenger.Register(App.MSG_NEW_SHOW,
+                                 () =>
+                                 {
+                                     var show = App.Model.Show.Create();
+                                     newTabForShow(show, true);
+
+
+
+                                 });
 
             App.Messenger.Register<infoClient>(App.MSG_DISPLAY_RES,
                                    info =>
@@ -130,7 +141,7 @@ namespace prbd_1617_G03
         {
             var tab = new TabItem()
             {
-                Header = isNew ? "<new show>" : cl.client.clientFName,
+                Header = isNew ? "<new Reservation>" : cl.client.clientFName,
                 Content = new newRes(cl, isNew)
             };
             tab.MouseDown += (o, e) =>
