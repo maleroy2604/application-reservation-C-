@@ -20,10 +20,9 @@ namespace prbd_1617_G03
     public partial class MainView : WindowBase
     {
 
-
-
         public MainView()
         {
+            InitializeComponent();
             App.Messenger.Register(App.MSG_VIEW_SHOW,
                                     () =>
                                     {
@@ -158,6 +157,7 @@ namespace prbd_1617_G03
             Dispatcher.InvokeAsync(() => tab.Focus());
         }
 
+        
     }
         
     }

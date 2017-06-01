@@ -90,11 +90,6 @@
     <Compile Include="newShow.xaml.cs">
       <DependentUpon>newShow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Include="ViewShow.xaml.cs">
       <DependentUpon>ViewShow.xaml</DependentUpon>
     </Compile>
@@ -210,12 +205,6 @@
       <Project>{2e922430-eaac-4589-a8f4-f35fbb9799b8}</Project>
       <Name>PRBD_Framework</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

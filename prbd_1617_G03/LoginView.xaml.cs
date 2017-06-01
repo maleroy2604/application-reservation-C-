@@ -18,9 +18,37 @@ namespace prbd_1617_G03
     
     public partial class LoginView : WindowBase
     {
+        public ICommand Login { get; set; }
+        public ICommand Cancel { get; set; }
+        private string pseudo;
+        public string Pseudo { get { return pseudo; } set { pseudo = value; Validate(); } }
+        private string password;
+        public string Password { get { return password; } set { password = value; Validate(); } }
         public LoginView()
         {
             InitializeComponent();
+
+            Login = new RelayCommand(LoginAction/*, () => { return pseudo != null && password != null && !HasErrors; }*/);
+            Cancel = new RelayCommand(() => Close());
+            DataContext = this;
+        }
+
+        private void LoginAction()
+        {
+            var user = Validate();
+            if (!HasErrors) 
+            {
+                //App.CurrentUser = user;
+                ShowMainView(); 
+                Close(); 
+            }
+        }
+
+        private static void ShowMainView()
+        {
+            var mainView = new MainView ();
+            mainView.Show();
+            Application.Current.MainWindow = mainView;
         }
     }
 }
