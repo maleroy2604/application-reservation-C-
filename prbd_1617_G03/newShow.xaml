@@ -30,10 +30,10 @@
         <Label Content="Date :" Grid.Row="1" />
         <DatePicker HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="1" 
                     VerticalAlignment="Top" Grid.Column="1" Width="251" 
-                    SelectedDate="{Binding showDate,UpdateSourceTrigger=PropertyChanged}"/>
+                    SelectedDate="{Binding showDate,UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding DateReadOnly}"/>
 
         <Label Content="Description :" Grid.Row="2" />
-        <TextBox Text="{Binding description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="71" Margin="0,0,159,0" />
+        <TextBox Text="{Binding description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Height="71" Margin="0,0,159,0" IsReadOnly="{Binding AdminReadOnly}"/>
 
         <StackPanel Orientation="Horizontal"/>
         <!-- ROW #3 -->
@@ -50,7 +50,7 @@
                    RenderOptions.BitmapScalingMode="Fant" Height="189" Margin="4,13,67,-14" Grid.ColumnSpan="2" />
             <StackPanel Grid.Column="2" Orientation="Vertical" Margin="10,18,-29,0" Height="170" VerticalAlignment="Top" Grid.ColumnSpan="2">
                 <StackPanel Margin="5,0,0,0" HorizontalAlignment="Left" Height="54">
-                    <Button x:Name="btnClear" Content="Clear" Width="75" VerticalAlignment="Top" Command="{Binding ClearImage}" Margin="0,0,0,5" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="btnClear" Content="Clear" Width="75" VerticalAlignment="Top" Command="{Binding ClearImage}" Margin="0,0,0,5" RenderTransformOrigin="0.5,0.5" Visibility="{Binding AdminVisible}">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -60,22 +60,22 @@
                             </TransformGroup>
                         </Button.RenderTransform>
                     </Button>
-                    <Button x:Name="btnLoad" Content="Load" Width="75" VerticalAlignment="Top" Command="{Binding LoadImage}" Margin="0,0,0,5"/>
+                    <Button x:Name="btnLoad" Content="Load" Width="75" VerticalAlignment="Top" Command="{Binding LoadImage}" Margin="0,0,0,5" Visibility="{Binding AdminVisible}"/>
                 </StackPanel>
                 <WrapPanel Height="82" Margin="0,0,202,0" RenderTransformOrigin="0.713,-0.476">
                     <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text=" Category A : "  />
-                    <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap"  Width="115" Margin="0,0,0,5" Text="{Binding PriceA,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap"  Width="115" Margin="0,0,0,5" Text="{Binding PriceA,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding AdminReadOnly}"/>
                     <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text=" Category B : "/>
-                    <TextBox x:Name="textBox1" Height="23" TextWrapping="Wrap" Text="{Binding PriceB,UpdateSourceTrigger=PropertyChanged}" Width="115" Margin="0,0,0,5"/>
+                    <TextBox x:Name="textBox1" Height="23" TextWrapping="Wrap" Text="{Binding PriceB,UpdateSourceTrigger=PropertyChanged}" Width="115" Margin="0,0,0,5" IsReadOnly="{Binding AdminReadOnly}"/>
                     <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text=" Category C : "/>
-                    <TextBox x:Name="textBox2" Height="23" TextWrapping="Wrap" Text="{Binding PriceC,UpdateSourceTrigger=PropertyChanged}" Width="115" Margin="0,0,0,5"/>
+                    <TextBox x:Name="textBox2" Height="23" TextWrapping="Wrap" Text="{Binding PriceC,UpdateSourceTrigger=PropertyChanged}" Width="115" Margin="0,0,0,5" IsReadOnly="{Binding AdminReadOnly}"/>
                 </WrapPanel>
             </StackPanel>
         </Grid>
         <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="197" Height="53" Margin="0,0,178,-18">
-            <Button x:Name="btnCancel" Content="Cancel" Command="{Binding Cancel}" Width="auto" Padding="5,1"/>
-            <Button x:Name="btnSave" Content="Save" Command="{Binding Save}" Width="auto" Margin="10,0,0,0" Padding="5,1"/>
-            <Button x:Name="btnDelete" Content="Delete" Command="{Binding Delete}" Width="auto" Margin="10,0,0,0" Padding="5,1" RenderTransformOrigin="2.367,-0.38"/>
+            <Button x:Name="btnCancel" Content="Cancel" Command="{Binding Cancel}" Width="auto" Padding="5,1" Visibility="{Binding AdminVisible}"/>
+            <Button x:Name="btnSave" Content="Save" Command="{Binding Save}" Width="auto" Margin="10,0,0,0" Padding="5,1" Visibility="{Binding AdminVisible}"/>
+            <Button x:Name="btnDelete" Content="Delete" Command="{Binding Delete}" Width="auto" Margin="10,0,0,0" Padding="5,1" RenderTransformOrigin="2.367,-0.38" Visibility="{Binding AdminVisible}"/>
         </WrapPanel>
         <StackPanel>
             <StackPanel Orientation="Horizontal"/>

@@ -32,6 +32,10 @@ namespace prbd_1617_G03
         public static Category CategoryA { get; private set; }
         public static Category CategoryB { get; private set; }
         public static Category CategoryC { get; private set; }
+        public static bool AdminReadOnly { get;  set; }
+        public static string AdminVisible { get;  set; }
+       
+       public static string VendorVisible { get; set; }
         public const string MSG_RES_CHANGED = "MSG_RES_CHANGED";
         public const string MSG_NEW_RES = "MSG_NEW_RES";
         public App()
@@ -40,8 +44,11 @@ namespace prbd_1617_G03
             CategoryA = Model.Category.Find(1);
             CategoryB = Model.Category.Find(2);
             CategoryC = Model.Category.Find(3);
+  
         }
         
+      
+
         private void PrepareDatabase()
         {
             // Donne une valeur à la propriété "DataProperty" qui est utilisée comme dossier de base dans App.config pour

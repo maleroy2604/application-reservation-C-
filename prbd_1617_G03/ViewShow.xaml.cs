@@ -21,6 +21,8 @@ namespace prbd_1617_G03
     {
         public ICommand NewShow { get; set; }
         public ICommand ShowDisplay { get; set; }
+
+        public string AdminVisible { get { return App.AdminVisible; } }
         private ObservableCollection<Show> shows;
        
 
@@ -49,9 +51,9 @@ namespace prbd_1617_G03
         }
         public ViewShow()
         {
-            
 
-           
+            Console.WriteLine(AdminVisible);
+
             Shows = new ObservableCollection<Show>(App.Model.Show);
 
             ClearFilter = new RelayCommand(() => { Filter = ""; });
@@ -77,7 +79,7 @@ namespace prbd_1617_G03
                         select m;
             Shows = new ObservableCollection<Show>(query);
         }
-
+        
         
     }
    

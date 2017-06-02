@@ -15,11 +15,12 @@ using System.Windows.Shapes;
 
 namespace prbd_1617_G03
 {
-    
+
     public partial class LoginView : WindowBase
     {
         public ICommand Login { get; set; }
         public ICommand Cancel { get; set; }
+        
         private string pseudo;
         public string Pseudo { get { return pseudo; } set { pseudo = value; Validate(); } }
         private string password;
@@ -28,7 +29,7 @@ namespace prbd_1617_G03
         {
             InitializeComponent();
 
-            Login = new RelayCommand(LoginAction/*, () => { return pseudo != null && password != null && !HasErrors; }*/);
+            Login = new RelayCommand(LoginAction, () => { return pseudo != null && password != null && !HasErrors; });
             Cancel = new RelayCommand(() => Close());
             DataContext = this;
         }
@@ -38,17 +39,97 @@ namespace prbd_1617_G03
             var user = Validate();
             if (!HasErrors) 
             {
-                //App.CurrentUser = user;
+                App.CurrentUser = user;
+                App.AdminVisible = adminVisible();
+                App.AdminReadOnly = adminReadOnly();
+                App.VendorVisible = vendorVisible();
+
+
                 ShowMainView(); 
                 Close(); 
             }
         }
 
+        private User Validate()
+        {
+            ClearErrors();
+            
+
+            var query = from m in App.Model.User where m.login == Pseudo  select m;
+            var user = query.FirstOrDefault();
+
+            if (string.IsNullOrEmpty(Pseudo))
+            {
+                AddError("Pseudo", "Required");
+                Console.WriteLine("Pseudo empty");
+            }
+            if (Pseudo != null)
+            {
+                if (Pseudo.Length < 3)
+                    AddError("Pseudo","Pseudo must contains 3 letters or more");
+                else
+                {
+                    if (user == null)
+                        AddError("Pseudo", "user does not exist");
+                }
+            }
+
+            if (string.IsNullOrEmpty(Password))
+                AddError("Password", "Required");
+            if (Password != null)
+            {
+                if (Password.Length < 3)
+                    AddError("Password", "Password must contains 3 letters or more");
+                else if (user != null && user.pwd != Password)
+                    AddError("Password", "wrong password");
+            }
+
+            RaiseErrors();
+
+            return user;
+        }
         private static void ShowMainView()
         {
             var mainView = new MainView ();
             mainView.Show();
             Application.Current.MainWindow = mainView;
+        }
+        private string adminVisible()
+        {
+
+            if (App.CurrentUser.admin == 1)
+            {
+                return "Visible";
+            }
+            else
+            {
+                return "Hidden";
+            }
+        }
+        private string vendorVisible()
+        {
+
+            if (App.CurrentUser.admin == 1)
+            {
+                return "Hidden";
+            }
+            else
+            {
+                return "Visible";
+            }
+        }
+
+        private bool adminReadOnly()
+        {
+
+            if (App.CurrentUser.admin == 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

@@ -26,7 +26,10 @@ namespace prbd_1617_G03
         public ICommand Delete { get; set; }
         private bool modified;
         private bool isNew;
+        public string VendorVisible { get { return App.VendorVisible; } }
+        public bool AdminReadOnly { get { return !(App.AdminReadOnly); } }
         public bool IsExisting { get { return !IsNew; } }
+        public bool DateReadOnly { get { return (App.AdminReadOnly); } }
 
         public string clientName
         {

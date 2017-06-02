@@ -31,8 +31,9 @@ namespace prbd_1617_G03
         public ICommand LoadImage { get; set; }
         public ICommand ClearImage { get; set; }
         public ICommand ClearFilter { get; set; }
-
-
+        public bool AdminReadOnly { get { return App.AdminReadOnly; } }
+        public string AdminVisible { get { return App.AdminVisible; } }
+        public bool DateReadOnly { get { return !(App.AdminReadOnly); } }
         private bool priceModified ;
 
         private bool isNew;

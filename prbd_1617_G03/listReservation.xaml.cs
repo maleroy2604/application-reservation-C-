@@ -24,6 +24,7 @@ namespace prbd_1617_G03
         public ICommand ResDisplay { get; set; }
         public ICommand ClearFilter { get; set; }
         public ICommand newRes { get; set; }
+        public string VendorVisible { get { return App.VendorVisible; } }
         private ObservableCollection<Client> clients;
         public ObservableCollection<Client> Clients
         {

@@ -31,7 +31,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Content="New Client" Command="{Binding newRes}" Margin="100,0,82,0" />
+        <Button Content="New Client" Command="{Binding newRes}" Margin="100,0,82,0" Visibility="{Binding VendorVisible}" />
         <TextBlock x:Name="textBlock" TextWrapping="Wrap"><Run Text="Double cliquez sur un client pour "/><Run Text="voir "/><Run Text="s"/><Run Text="'est reservation"/><Run Text="s"/><Run Text=" !"/></TextBlock>
     </StackPanel>
 
