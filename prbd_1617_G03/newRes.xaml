@@ -40,26 +40,32 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal"/>
         </StackPanel>
-        <TextBox x:Name="textBox" TextWrapping="Wrap" Margin="271,43,225,170" 
+        <TextBox x:Name="textBox" TextWrapping="Wrap" Margin="271,43,267,170" 
                  Text="{Binding nbPlaceA,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" IsReadOnly="{Binding AdminReadOnly}"/>
 
         <TextBlock x:Name="textBlock" TextWrapping="Wrap"  Margin="0,43,49,34" Grid.Row="2"  ><Run Text=" Category A "/><Run Text=":"/><Run Text=" "/></TextBlock>
-        <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text=" Prix  : " Margin="101,43,564,34" Grid.Row="2" Grid.ColumnSpan="2"  />
+        <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text=" Prix  : " Margin="95,43,570,34" Grid.Row="2" Grid.ColumnSpan="2"  />
         <TextBlock x:Name="textBox1_Copy" TextWrapping="Wrap" Text="{Binding PriceA}" Margin="0,43,506,174" Grid.Column="1" Grid.Row="2"  HorizontalAlignment="Right" Width="64"/>
         <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text=" Category B :" Margin="0,78,49,15" Grid.Row="2"/>
         <TextBlock x:Name="textBox1" TextWrapping="Wrap" Text="{Binding PriceB}" Margin="20,78,506,0" Grid.Column="1" Grid.Row="2" Height="20" VerticalAlignment="Top" />
         <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="101,78,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="41" Height="19"><Run Text="Prix"/><Run Text="  "/><Run Text=":"/></TextBlock>
-        <TextBox x:Name="textBox_Copy" TextWrapping="Wrap" Margin="271,76,225,138" Text="{Binding nbPlaceB,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" IsReadOnly="{Binding AdminReadOnly}"/>
+        <TextBox x:Name="textBox_Copy" TextWrapping="Wrap" Margin="271,76,267,138" Text="{Binding nbPlaceB,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" IsReadOnly="{Binding AdminReadOnly}"/>
         <TextBlock x:Name="textBlock1_Copy" TextWrapping="Wrap" Margin="0,111,49,0" Grid.Row="2"><Run Text=" Category "/><Run Text="C"/><Run Text=" :"/></TextBlock>
-        <TextBlock x:Name="textBlock3_Copy" HorizontalAlignment="Left" Margin="106,111,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="41" Height="19"><Run Text="Prix"/><Run Text="  "/><Run Text=":"/></TextBlock>
+        <TextBlock x:Name="textBlock3_Copy" HorizontalAlignment="Left" Margin="101,111,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" Grid.ColumnSpan="2"><Run Text="Prix"/><Run Text="  "/><Run Text=":"/></TextBlock>
         <TextBlock x:Name="textBox1_Copy1" TextWrapping="Wrap" Text="{Binding PriceC }" Margin="20,111,506,0" Grid.Column="1" Grid.Row="2" Height="19" VerticalAlignment="Top" />
-        <TextBox x:Name="textBox_Copy1" TextWrapping="Wrap" Margin="271,111,225,103" Text="{Binding nbPlaceC,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" RenderTransformOrigin="0.535,1.739" IsReadOnly="{Binding AdminReadOnly}"/>
+        <TextBox x:Name="textBox_Copy1" TextWrapping="Wrap" Margin="271,111,267,103" Text="{Binding nbPlaceC,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" RenderTransformOrigin="0.535,1.739" IsReadOnly="{Binding AdminReadOnly}"/>
         <Button Content="Save" Command="{Binding Save}" Grid.Column="1" HorizontalAlignment="Left" Margin="0,198,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"  Visibility="{Binding VendorVisible}" />
         <Button Content="Delete" Command="{Binding Delete}" Grid.Column="1" HorizontalAlignment="Left" Margin="80,198,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"  Visibility="{Binding VendorVisible}"/>
         <Button Content="Cancel"  Command="{Binding Cancel}" Grid.Column="1" HorizontalAlignment="Left" Margin="160,198,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"  Visibility="{Binding VendorVisible}"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="110,43,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Nombre de place voulu :" VerticalAlignment="Top" Width="156" Height="19"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="110,76,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Nombre de place voulu :" VerticalAlignment="Top"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="110,111,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Nombre de place voulu :" VerticalAlignment="Top" Width="152"/>
+        <TextBlock x:Name="textBlock2" Grid.Column="1" HorizontalAlignment="Left" Margin="356,43,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="place restante"/><Run Text=" :"/></TextBlock>
+        <TextBlock x:Name="textBlock2_Copy" Grid.Column="1" HorizontalAlignment="Left" Margin="356,78,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="place restante"/><Run Text=" :"/></TextBlock>
+        <TextBlock x:Name="textBlock2_Copy1" Grid.Column="1" HorizontalAlignment="Left" Margin="356,111,0,0" Grid.Row="2" TextWrapping="Wrap" Text="place restante :" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock4" Grid.Column="1" HorizontalAlignment="Left" Margin="468,43,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PlaceRestanteA}" VerticalAlignment="Top" RenderTransformOrigin="-0.521,0.483"/>
+        <TextBlock x:Name="textBlock4_Copy" Grid.Column="1" HorizontalAlignment="Left" Margin="468,78,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PlaceRestanteB}" VerticalAlignment="Top" RenderTransformOrigin="-0.521,0.483"/>
+        <TextBlock x:Name="textBlock4_Copy1" Grid.Column="1" HorizontalAlignment="Left" Margin="468,111,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PlaceRestanteC}" VerticalAlignment="Top" RenderTransformOrigin="-0.521,0.483"/>
 
 
     </Grid>

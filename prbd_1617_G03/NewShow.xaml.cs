@@ -34,7 +34,7 @@ namespace prbd_1617_G03
         public bool AdminReadOnly { get { return App.AdminReadOnly; } }
         public string AdminVisible { get { return App.AdminVisible; } }
         public bool DateReadOnly { get { return !(App.AdminReadOnly); } }
-        private bool priceModified ;
+        private bool modified ;
 
         private bool isNew;
         public bool IsExisting { get { return !IsNew; } }
@@ -44,9 +44,10 @@ namespace prbd_1617_G03
             get { return isNew; }
             set
             {
+                modified = true;
                 isNew = value;
                 RaisePropertyChanged(nameof(IsNew));
-
+                Validate();
             }
 
         }
@@ -55,9 +56,11 @@ namespace prbd_1617_G03
             get { return Show.showName; }
             set
             {
+                modified = true;
                 Show.showName = value;
                 RaisePropertyChanged(nameof(showName));
                 App.Messenger.NotifyColleagues(App.MSG_NAMESHOW_CHANGED, string.IsNullOrEmpty(value) ? "<new show>" : value);
+                Validate();
             }
         }
         public DateTime showDate
@@ -65,8 +68,10 @@ namespace prbd_1617_G03
             get { return Show.showDate; }
             set
             {
+                modified = true;
                 Show.showDate = value;
                 RaisePropertyChanged(nameof(showDate));
+                Validate();
             }
         }
         public string description
@@ -74,8 +79,10 @@ namespace prbd_1617_G03
             get { return Show.description; }
             set
             {
+                modified = true;
                 Show.description = value;
                 RaisePropertyChanged(nameof(description));
+                Validate();
 
             }
         }
@@ -84,34 +91,39 @@ namespace prbd_1617_G03
             get { return Show.poster; }
             set
             {
+                modified = true;
                 Show.poster = value;
                 RaisePropertyChanged(nameof(poster));
+                Validate();
             }
         }
         public decimal PriceA
         {
-            get { return getPrice(Show.idS, 1); }
+            get { return getPrice(Show.idS, App.CategoryA.idCat); }
             set {
                
-                setPrice(1,value);
-                priceModified = true;
+                setPrice(App.CategoryA.idCat, value);
+                modified = true;
                 RaisePropertyChanged(nameof(PriceA));
+                Validate();
             }
         }
         public decimal PriceB
         {
-            get { return getPrice(Show.idS, 2); }
+            get { return getPrice(Show.idS, App.CategoryB.idCat); }
             set {
-                setPrice(2, value);
-                priceModified = true;
+                setPrice(App.CategoryB.idCat, value);
+                modified = true;
+                Validate();
             }
         }
         public decimal PriceC
         {
-            get { return getPrice(Show.idS, 3); }
+            get { return getPrice(Show.idS, App.CategoryC.idCat); }
             set {
-                setPrice(3, value);
-                priceModified = true;
+                setPrice(App.CategoryC.idCat, value);
+                modified = true;
+                Validate();
             }
         }
 
@@ -123,7 +135,7 @@ namespace prbd_1617_G03
             DataContext = this;
             Show = show;
             IsNew = isNew;
-            priceModified = false;
+            modified = false;
 
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Cancel = new RelayCommand(CancelAction, CanSaveOrCancelAction);
@@ -137,6 +149,7 @@ namespace prbd_1617_G03
         }
         private void SaveAction()
         {
+            Validate();
             if (IsNew)
             {
 
@@ -151,14 +164,9 @@ namespace prbd_1617_G03
         }
         private bool CanSaveOrCancelAction()
         {
-            if (IsNew)
-                return !string.IsNullOrEmpty(showName) && !HasErrors;
-            var change = (from c in App.Model.ChangeTracker.Entries<Show>()
-                          where c.Entity == Show
-                          select c).FirstOrDefault();
 
 
-            return priceModified || change != null && change.State != EntityState.Unchanged;
+            return modified ;
         }
         private void CancelAction()
         {
@@ -168,7 +176,7 @@ namespace prbd_1617_G03
                
                 description = null;
                 poster = null;
-
+                RaisePropertyPrice();
                 RaisePropertyChanged(nameof(Show));
             }
             else
@@ -179,6 +187,7 @@ namespace prbd_1617_G03
                 if (change != null)
                 {
                     change.Reload();
+                    RaisePropertyPrice();
                     RaisePropertyChanged(nameof(showDate));
                     RaisePropertyChanged(nameof(description));
                     RaisePropertyChanged(nameof(poster));
@@ -266,10 +275,51 @@ namespace prbd_1617_G03
             
 
         }
-        
-        
+        private void RaisePropertyPrice()
+        {
+            PriceA=0;
+            PriceB=0;
+            PriceC=0;
+            RaisePropertyChanged(nameof(PriceA));
+            RaisePropertyChanged(nameof(PriceB));
+            RaisePropertyChanged(nameof(PriceC));
 
-        
+
+        }
+        private void Validate()
+        {
+            ClearErrors();
+            if (string.IsNullOrEmpty(showName) )
+            {
+                AddError("showName", "Required");
+
+            }
+            if (string.IsNullOrEmpty(description))
+            {
+                AddError("description", "Required");
+            }
+            if (PriceA < 0)
+            {
+                AddError("PriceA", "Can't be negative !");
+                modified = false;
+            }
+            if (PriceB < 0)
+            {
+                AddError("PriceB", "Can't be negative !");
+                modified = false;
+
+            }
+            if (PriceC < 0)
+            {
+                AddError("PriceC", "Can't be negative !");
+                modified = false;
+
+            }
+            
+        }
+
+
+
     }
 }
 
