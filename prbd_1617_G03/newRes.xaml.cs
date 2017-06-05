@@ -106,8 +106,9 @@ namespace prbd_1617_G03
                     modified = true;
                 setPlace(info.show.idS, App.CategoryA, Client.idC, value);
                 RaisePropertyChanged(nameof(PlaceRestanteA));
-               
-                
+                Validate();
+
+
 
             }
         }
@@ -120,7 +121,7 @@ namespace prbd_1617_G03
                     modified = true;
                 setPlace(info.show.idS, App.CategoryB, Client.idC, value);
                 RaisePropertyChanged(nameof(PlaceRestanteB));
-                
+                Validate();
 
 
 
@@ -135,7 +136,8 @@ namespace prbd_1617_G03
                     modified = true;
                 setPlace(info.show.idS, App.CategoryC, Client.idC, value);
                 RaisePropertyChanged(nameof(PlaceRestanteC));
-             
+                Validate();
+
 
 
             }
@@ -181,6 +183,8 @@ namespace prbd_1617_G03
             if ( App.CategoryA.placesNumber - (nbrTotal(App.CategoryA)) <0 ||
                 App.CategoryB.placesNumber - (nbrTotal(App.CategoryB)) < 0 || App.CategoryC.placesNumber - (nbrTotal(App.CategoryC)) < 0)
             {
+               
+
                 modified = false;
             }
             return modified;
@@ -376,7 +380,31 @@ namespace prbd_1617_G03
                 AddError("nbPlaceA", "Can't be negative !");
 
             }
+            if (nbPlaceB < 0)
+            {
+                AddError("nbPlaceA", "Can't be negative !");
 
+            }
+            if (nbPlaceA < 0)
+            {
+                AddError("nbPlaceA", "Can't be negative !");
+
+            }
+            if (nbPlaceA < 0)
+            {
+                AddError("nbPlaceA", "Can't be negative !");
+
+            }
+            if (nbPlaceA < 0)
+            {
+                AddError("nbPlaceB", "Can't be negative !");
+
+            }
+            if (nbPlaceA < 0)
+            {
+                AddError("nbPlaceC", "Can't be negative !");
+
+            }
 
 
 
