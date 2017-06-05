@@ -23,16 +23,17 @@
             </i:Interaction.Triggers>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <DockPanel >
                         <TextBlock FontSize="14" FontWeight="Bold" Width="80" TextAlignment="center" Text="{Binding clientFName}" />
                         <TextBlock FontSize="14" FontWeight="Bold" Width="80" TextAlignment="center" Text="{Binding clientLName}" />
                         
-                    </StackPanel>
+                        
+                    </DockPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <Button Content="New Client" Command="{Binding newRes}" Margin="100,0,82,0" Visibility="{Binding VendorVisible}" />
-        <TextBlock x:Name="textBlock" TextWrapping="Wrap"><Run Text="Double cliquez sur un client pour "/><Run Text="voir "/><Run Text="s"/><Run Text="'est reservation"/><Run Text="s"/><Run Text=" !"/></TextBlock>
+        <TextBlock x:Name="textBlock" TextWrapping="Wrap"><Run Text="Double cliquez sur un client pour "/><Run Text="voir "/><Run Text="s"/><Run Text="'est reservation"/><Run Text="s"/><Run Text=" et info"/><Run Text="s"/><Run Text=" détaillé"/><Run Text="s"/><Run Text=" !"/></TextBlock>
     </StackPanel>
 
 </f:UserControlBase>

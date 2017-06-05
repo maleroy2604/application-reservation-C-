@@ -19,19 +19,23 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="236"/>
-            <RowDefinition Height="0"/>
+            <RowDefinition Height="8"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <!-- ROW #1 -->
+
         <Label Content="Nom du Client :" />
-        <TextBox x:Name="txtclientName" Grid.Column="1" Text="{Binding clientName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  IsReadOnly="{Binding Path=IsExisting}" Height="25" Margin="0,2,383,2" />
+        <f:ValidatedField Grid.Column="1" VerticalAlignment="Center" Height="29">
+            <TextBox x:Name="txtclientName" Grid.Column="1" Text="{Binding clientName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  IsReadOnly="{Binding Path=IsExisting}" Height="25" Margin="0,2,383,2" />
+        </f:ValidatedField>
         <!-- ROW #2 -->
 
         <Label Content="Prénom du client  :" Grid.Row="1" />
-        <TextBox x:Name="txtclientLName" Grid.Column="1" Text="{Binding nickName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"   Height="25" Margin="0,3,383,1" Grid.Row="1" IsReadOnly="{Binding AdminReadOnly}"/>
-
-        <Label Content="Date de naissance  :" Grid.Row="2" Margin="0,3,0,64" />
-        <DatePicker HorizontalAlignment="Left" Margin="0,4,0,0" Grid.Row="2" 
+        <f:ValidatedField Grid.Column="1"  Margin="0,1,0,235" Grid.Row="1" Grid.RowSpan="2" >
+            <TextBox x:Name="txtclientLName" Grid.Column="1" Text="{Binding nickName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"   Height="25" Margin="0,3,383,1" Grid.Row="1"  IsReadOnly="{Binding Path=IsExisting}"/>
+        </f:ValidatedField >
+        <Label Content="Date de naissance  :" Grid.Row="2" Margin="-5,5,5,62" />
+        <DatePicker HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="2" 
                     VerticalAlignment="Top" Grid.Column="1" Width="251" 
                     SelectedDate="{Binding clientDate,UpdateSourceTrigger=PropertyChanged}" Height="27" IsEnabled="{Binding  DateReadOnly }"/>
 
@@ -40,33 +44,41 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal"/>
         </StackPanel>
-        <TextBox x:Name="textBox" TextWrapping="Wrap" Margin="271,43,267,170" 
+        <f:ValidatedField Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Height="234" Margin="0,1">
+            <TextBox x:Name="textBox" TextWrapping="Wrap" Margin="271,43,267,170" 
                  Text="{Binding nbPlaceA,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" IsReadOnly="{Binding AdminReadOnly}"/>
-
+        </f:ValidatedField >
         <TextBlock x:Name="textBlock" TextWrapping="Wrap"  Margin="0,43,49,34" Grid.Row="2"  ><Run Text=" Category A "/><Run Text=":"/><Run Text=" "/></TextBlock>
         <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text=" Prix  : " Margin="95,43,570,34" Grid.Row="2" Grid.ColumnSpan="2"  />
         <TextBlock x:Name="textBox1_Copy" TextWrapping="Wrap" Text="{Binding PriceA}" Margin="0,43,506,174" Grid.Column="1" Grid.Row="2"  HorizontalAlignment="Right" Width="64"/>
         <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text=" Category B :" Margin="0,78,49,15" Grid.Row="2"/>
         <TextBlock x:Name="textBox1" TextWrapping="Wrap" Text="{Binding PriceB}" Margin="20,78,506,0" Grid.Column="1" Grid.Row="2" Height="20" VerticalAlignment="Top" />
         <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="101,78,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="41" Height="19"><Run Text="Prix"/><Run Text="  "/><Run Text=":"/></TextBlock>
-        <TextBox x:Name="textBox_Copy" TextWrapping="Wrap" Margin="271,76,267,138" Text="{Binding nbPlaceB,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" IsReadOnly="{Binding AdminReadOnly}"/>
+        <f:ValidatedField Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Height="236">
+            <TextBox x:Name="textBox_Copy" TextWrapping="Wrap" Margin="271,76,267,138" Text="{Binding nbPlaceB,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" IsReadOnly="{Binding AdminReadOnly}"/>
+        </f:ValidatedField >
         <TextBlock x:Name="textBlock1_Copy" TextWrapping="Wrap" Margin="0,111,49,0" Grid.Row="2"><Run Text=" Category "/><Run Text="C"/><Run Text=" :"/></TextBlock>
         <TextBlock x:Name="textBlock3_Copy" HorizontalAlignment="Left" Margin="101,111,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" Grid.ColumnSpan="2"><Run Text="Prix"/><Run Text="  "/><Run Text=":"/></TextBlock>
         <TextBlock x:Name="textBox1_Copy1" TextWrapping="Wrap" Text="{Binding PriceC }" Margin="20,111,506,0" Grid.Column="1" Grid.Row="2" Height="19" VerticalAlignment="Top" />
-        <TextBox x:Name="textBox_Copy1" TextWrapping="Wrap" Margin="271,111,267,103" Text="{Binding nbPlaceC,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" RenderTransformOrigin="0.535,1.739" IsReadOnly="{Binding AdminReadOnly}"/>
-        <Button Content="Save" Command="{Binding Save}" Grid.Column="1" HorizontalAlignment="Left" Margin="0,198,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"  Visibility="{Binding VendorVisible}" />
-        <Button Content="Delete" Command="{Binding Delete}" Grid.Column="1" HorizontalAlignment="Left" Margin="80,198,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"  Visibility="{Binding VendorVisible}"/>
-        <Button Content="Cancel"  Command="{Binding Cancel}" Grid.Column="1" HorizontalAlignment="Left" Margin="160,198,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"  Visibility="{Binding VendorVisible}"/>
+        <f:ValidatedField Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Height="234" Margin="0,0,0,2">
+            <TextBox x:Name="textBox_Copy1" TextWrapping="Wrap" Margin="271,111,267,103" Text="{Binding nbPlaceC,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" RenderTransformOrigin="0.535,1.739" IsReadOnly="{Binding AdminReadOnly}"/>
+        </f:ValidatedField >
+        <Button Content="Save" Command="{Binding Save}" HorizontalAlignment="Left" Margin="121,26,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75"  Visibility="{Binding VendorVisible}" Grid.ColumnSpan="2" Height="23" />
+        <Button Content="Delete" Command="{Binding Delete}" Grid.Column="1" HorizontalAlignment="Left" Margin="69,26,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75"  Visibility="{Binding VendorVisible}" Height="23"/>
+        <Button Content="Cancel"  Command="{Binding Cancel}" Grid.Column="1" HorizontalAlignment="Left" Margin="149,26,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75"  Visibility="{Binding VendorVisible}" Height="23"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="110,43,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Nombre de place voulu :" VerticalAlignment="Top" Width="156" Height="19"/>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="110,76,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Nombre de place voulu :" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="110,111,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Nombre de place voulu :" VerticalAlignment="Top" Width="152"/>
-        <TextBlock x:Name="textBlock2" Grid.Column="1" HorizontalAlignment="Left" Margin="356,43,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="place restante"/><Run Text=" :"/></TextBlock>
-        <TextBlock x:Name="textBlock2_Copy" Grid.Column="1" HorizontalAlignment="Left" Margin="356,78,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="place restante"/><Run Text=" :"/></TextBlock>
-        <TextBlock x:Name="textBlock2_Copy1" Grid.Column="1" HorizontalAlignment="Left" Margin="356,111,0,0" Grid.Row="2" TextWrapping="Wrap" Text="place restante :" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock4" Grid.Column="1" HorizontalAlignment="Left" Margin="468,43,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PlaceRestanteA}" VerticalAlignment="Top" RenderTransformOrigin="-0.521,0.483"/>
-        <TextBlock x:Name="textBlock4_Copy" Grid.Column="1" HorizontalAlignment="Left" Margin="468,78,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PlaceRestanteB}" VerticalAlignment="Top" RenderTransformOrigin="-0.521,0.483"/>
-        <TextBlock x:Name="textBlock4_Copy1" Grid.Column="1" HorizontalAlignment="Left" Margin="468,111,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PlaceRestanteC}" VerticalAlignment="Top" RenderTransformOrigin="-0.521,0.483"/>
-
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="110,76,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Nombre de place voulu :" VerticalAlignment="Top" Height="19" Width="152"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="110,111,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Nombre de place voulu :" VerticalAlignment="Top" Width="152" Height="19"/>
+        <TextBlock x:Name="textBlock2" Grid.Column="1" HorizontalAlignment="Left" Margin="356,43,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="93"><Run Text="place restante"/><Run Text=" :"/></TextBlock>
+        <TextBlock x:Name="textBlock2_Copy" Grid.Column="1" HorizontalAlignment="Left" Margin="356,78,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="93"><Run Text="place restante"/><Run Text=" :"/></TextBlock>
+        <TextBlock x:Name="textBlock2_Copy1" Grid.Column="1" HorizontalAlignment="Left" Margin="356,111,0,0" Grid.Row="2" TextWrapping="Wrap" Text="place restante :" VerticalAlignment="Top" Height="19" Width="93"/>
+        <TextBlock x:Name="textBlock4" Grid.Column="1" HorizontalAlignment="Left" Margin="468,43,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PlaceRestanteA}" VerticalAlignment="Top" RenderTransformOrigin="-0.521,0.483" Height="19" Width="0"/>
+        <TextBlock x:Name="textBlock4_Copy" Grid.Column="1" HorizontalAlignment="Left" Margin="468,78,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PlaceRestanteB}" VerticalAlignment="Top" RenderTransformOrigin="-0.521,0.483" Height="19" Width="0"/>
+        <TextBlock x:Name="textBlock4_Copy1" Grid.Column="1" HorizontalAlignment="Left" Margin="468,111,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PlaceRestanteC}" VerticalAlignment="Top" RenderTransformOrigin="-0.521,0.483" Height="19" Width="0"/>
+        <TextBlock x:Name="textBlock5" Grid.Column="1" HorizontalAlignment="Left" Margin="224,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="80"><Run Text="Code P"/><Run Text="o"/><Run Text="stal"/><Run Text=" :"/></TextBlock>
+        <f:ValidatedField Margin="121,3,122,1" Grid.ColumnSpan="2">
+            <TextBox x:Name="textBox2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="319,2,0,0" TextWrapping="Wrap" Text="{Binding postalCode,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.377,0.777" IsReadOnly="{Binding AdminReadOnly}"/>
+        </f:ValidatedField >
 
     </Grid>
 </f:UserControlBase>

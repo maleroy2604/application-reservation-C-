@@ -140,7 +140,7 @@ namespace prbd_1617_G03
         {
             var tab = new TabItem()
             {
-                Header = isNew ? "<new Reservation>" : cl.client.clientFName,
+                Header = isNew ? cl.client.clientFName:"<new Reservation>"  ,
                 Content = new newRes(cl, isNew)
             };
             tab.MouseDown += (o, e) =>

@@ -40,7 +40,7 @@ namespace prbd_1617_G03
                 modified = true;
                 Client.clientFName = value;
                 RaisePropertyChanged(nameof(clientName));
-              
+                Validate();
             }
         }
         public string nickName
@@ -51,6 +51,7 @@ namespace prbd_1617_G03
                 modified = true;
                 Client.clientLName = value;
                 RaisePropertyChanged(nameof(nickName));
+                Validate();
 
             }
         }
@@ -59,9 +60,25 @@ namespace prbd_1617_G03
             get { return Client.bdd; }
             set
             {
-                modified = true;
+                if (isNew == false)
+                    modified = true;
                 Client.bdd = value;
                 RaisePropertyChanged(nameof(clientDate));
+               
+
+            }
+        }
+        public int? postalCode
+        {
+            get { return Client.postalCode; }
+            set
+            {
+                if (isNew == false)
+                    modified = true;
+                Client.postalCode = value;
+                RaisePropertyChanged(nameof(postalCode));
+               
+
             }
         }
         public decimal PriceA
@@ -85,9 +102,12 @@ namespace prbd_1617_G03
             get { return getPlace(info.show.idS,App.CategoryA); }
             set
             {
-                modified = true;
+                if (isNew == false)
+                    modified = true;
                 setPlace(info.show.idS, App.CategoryA, Client.idC, value);
                 RaisePropertyChanged(nameof(PlaceRestanteA));
+               
+                
 
             }
         }
@@ -96,10 +116,13 @@ namespace prbd_1617_G03
             get { return getPlace(info.show.idS,App.CategoryB); }
             set
             {
-                modified = true;
+                if (isNew ==false)
+                    modified = true;
                 setPlace(info.show.idS, App.CategoryB, Client.idC, value);
-               
                 RaisePropertyChanged(nameof(PlaceRestanteB));
+                
+
+
 
             }
         }
@@ -108,9 +131,11 @@ namespace prbd_1617_G03
             get { return getPlace(info.show.idS, App.CategoryC); }
             set
             {
-                modified = true;
+                if (isNew == false)
+                    modified = true;
                 setPlace(info.show.idS, App.CategoryC, Client.idC, value);
                 RaisePropertyChanged(nameof(PlaceRestanteC));
+             
 
 
             }
@@ -127,8 +152,10 @@ namespace prbd_1617_G03
             set
             {
                 isNew = value;
+                if (isNew == true)
+                    Validate();
                 RaisePropertyChanged(nameof(IsNew));
-
+               
             }
 
         } 
@@ -140,7 +167,7 @@ namespace prbd_1617_G03
             Client = cl.client;
             info = cl;
             IsNew = isNew;
-           modified = false;
+            modified = false;
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Cancel = new RelayCommand(CancelAction, CanSaveOrCancelAction);
             Delete  = new RelayCommand(DeleteAction, () => { return IsExisting; });
@@ -150,7 +177,8 @@ namespace prbd_1617_G03
 
         private bool CanSaveOrCancelAction()
         {
-            if( App.CategoryA.placesNumber - (nbrTotal(App.CategoryA)) <0 ||
+            
+            if ( App.CategoryA.placesNumber - (nbrTotal(App.CategoryA)) <0 ||
                 App.CategoryB.placesNumber - (nbrTotal(App.CategoryB)) < 0 || App.CategoryC.placesNumber - (nbrTotal(App.CategoryC)) < 0)
             {
                 modified = false;
@@ -162,6 +190,7 @@ namespace prbd_1617_G03
 
         private void SaveAction()
         {
+            
             if (IsNew)
             {
 
@@ -321,6 +350,38 @@ namespace prbd_1617_G03
             RaisePropertyChanged(nameof(nbPlaceA));
             RaisePropertyChanged(nameof(nbPlaceB));
             RaisePropertyChanged(nameof(nbPlaceC));
+
+        }
+        private  void Validate()
+        {
+            ClearErrors();
+            if (string.IsNullOrEmpty(clientName))
+            {
+                AddError("clientName", "Required");
+                
+
+            }
+            if (string.IsNullOrEmpty(nickName))
+            {
+                AddError("nickName", "Required");
+               
+            }
+            if (postalCode < 0)
+            {
+                AddError("postalCode", "Can't be negative !");
+               
+            }
+            if (nbPlaceA < 0)
+            {
+                AddError("nbPlaceA", "Can't be negative !");
+
+            }
+
+
+
+
+
+
 
         }
     }

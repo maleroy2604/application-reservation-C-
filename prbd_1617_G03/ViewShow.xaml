@@ -31,6 +31,7 @@
         </ListView>
 
         <Button Content="New Show" Command="{Binding NewShow}" Margin="100,0,82,0" Visibility="{Binding AdminVisible}"/>
+        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="(Double cliquez sur le nom d'un show pour voir ses infos)"/>
     </StackPanel>
 
 </f:UserControlBase>

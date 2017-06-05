@@ -8,7 +8,7 @@
         xmlns:p="clr-namespace:prbd_1617_G03.Properties"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
         mc:Ignorable="d"
-        Title="LoginView_Title" WindowStartupLocation="CenterScreen"
+        Title="Login" WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=txtPseudo}" ResizeMode="NoResize"
         Width="250" Height="200"
         SizeToContent="WidthAndHeight">
