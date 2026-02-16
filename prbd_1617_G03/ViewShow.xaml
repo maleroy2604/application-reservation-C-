@@ -8,30 +8,33 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
         mc:Ignorable="d"
         Height="300" Width="300">
-    <StackPanel>
-        <TextBlock Text="List of all shows" FontSize="16" FontWeight="Bold"/>
-        <StackPanel Orientation="Horizontal">
-            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
-            <Button Content="Clear" Command="{Binding ClearFilter}"/>
+    <StackPanel Margin="10">
+        <TextBlock Text="Discover Exceptional Shows" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,6"/>
+        <TextBlock Text="Browse the complete catalog and open any show to view details and reservations." TextWrapping="Wrap" Margin="0,0,0,10" Foreground="#555"/>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="220" ToolTip="Search by show name or description"/>
+            <Button Content="Clear" Command="{Binding ClearFilterCommand}" Margin="8,0,0,0"/>
         </StackPanel>
         <ListView x:Name="ListView" ItemsSource="{Binding Shows}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding ShowDisplay}"
+                    <i:InvokeCommandAction Command="{Binding ShowDisplayCommand}"
                                         CommandParameter="{Binding ElementName=ListView, Path=SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock FontSize="14"  TextAlignment="Center" Text="{Binding showName}" />
+                    <StackPanel Margin="2">
+                        <TextBlock FontSize="14" FontWeight="SemiBold" Text="{Binding showName}" />
+                        <TextBlock FontSize="12" Foreground="#666" Text="{Binding description}" TextTrimming="CharacterEllipsis" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Content="New Show" Command="{Binding NewShow}" Margin="100,0,82,0" Visibility="{Binding AdminVisible}"/>
-        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="(Double cliquez sur le nom d'un show pour voir ses infos)"/>
+        <Button Content="Create New Show" Command="{Binding NewShowCommand}" Margin="0,10,0,0" HorizontalAlignment="Left" Visibility="{Binding AdminVisible}"/>
+        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Margin="0,8,0,0" Foreground="#666"
+                   Text="Tip: Double-click a show to open its detailed reservation dashboard."/>
     </StackPanel>
 
 </f:UserControlBase>

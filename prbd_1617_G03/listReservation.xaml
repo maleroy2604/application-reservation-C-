@@ -8,32 +8,33 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
         mc:Ignorable="d"
         Height="300" Width="300">
-    <StackPanel>
-        <TextBlock FontSize="16" FontWeight="Bold"><Run Text="List of "/><Run Text="Client"/></TextBlock>
-        <StackPanel Orientation="Horizontal">
-            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
-            <Button Content="Clear" Command="{Binding ClearFilter}"/>
+    <StackPanel Margin="10">
+        <TextBlock FontSize="20" FontWeight="SemiBold" Margin="0,0,0,6">Reserved Clients</TextBlock>
+        <TextBlock Text="Identify attendees quickly and open a complete reservation profile in one double-click." Foreground="#555" TextWrapping="Wrap" Margin="0,0,0,10"/>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="220" ToolTip="Search by first or last name"/>
+            <Button Content="Clear" Command="{Binding ClearFilterCommand}" Margin="8,0,0,0"/>
         </StackPanel>
         <ListView x:Name="ListView" ItemsSource="{Binding Clients}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding ResDisplay}"
+                    <i:InvokeCommandAction Command="{Binding ResDisplayCommand}"
                                         CommandParameter="{Binding ElementName=ListView, Path=SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <DockPanel >
-                        <TextBlock FontSize="14" FontWeight="Bold" Width="80" TextAlignment="center" Text="{Binding clientFName}" />
-                        <TextBlock FontSize="14" FontWeight="Bold" Width="80" TextAlignment="center" Text="{Binding clientLName}" />
+                        <TextBlock FontSize="14" FontWeight="SemiBold" Width="120" TextAlignment="Left" Text="{Binding clientFName}" />
+                        <TextBlock FontSize="14" FontWeight="SemiBold" Width="120" TextAlignment="Left" Text="{Binding clientLName}" />
                         
                         
                     </DockPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Content="New Client" Command="{Binding newRes}" Margin="100,0,82,0" Visibility="{Binding VendorVisible}" />
-        <TextBlock x:Name="textBlock" TextWrapping="Wrap"><Run Text="Double cliquez sur un client pour "/><Run Text="voir "/><Run Text="s"/><Run Text="'est reservation"/><Run Text="s"/><Run Text=" et info"/><Run Text="s"/><Run Text=" détaillé"/><Run Text="s"/><Run Text=" !"/></TextBlock>
+        <Button Content="Create Reservation" Command="{Binding NewReservationCommand}" Margin="0,10,0,0" HorizontalAlignment="Left" Visibility="{Binding VendorVisible}" />
+        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Margin="0,8,0,0" Foreground="#666" Text="Tip: Double-click a client to view reservation details and update seats."/>
     </StackPanel>
 
 </f:UserControlBase>
